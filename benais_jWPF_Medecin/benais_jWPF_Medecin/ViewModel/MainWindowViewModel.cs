@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace benais_jWPF_Medecin.ViewModel
 {
-    public class MainViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
         private UserControl _currentUC;
         public UserControl CurrentUC
@@ -21,7 +21,7 @@ namespace benais_jWPF_Medecin.ViewModel
             }
         }
 
-        public MainViewModel()
+        public MainWindowViewModel()
         {
             CurrentUC = new LoginUC();
         }
