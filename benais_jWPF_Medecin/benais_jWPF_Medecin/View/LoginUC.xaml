@@ -4,9 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:benais_jWPF_Medecin.View"
+             xmlns:vm="clr-namespace:benais_jWPF_Medecin.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:LoginViewModel></vm:LoginViewModel>
+    </UserControl.DataContext>
+    
     <Grid>
-        <TextBox HorizontalAlignment="Center" VerticalAlignment="Center"> Login </TextBox>
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox Width="200" Text="{Binding Login, Mode=TwoWay}"/>
+            <TextBox Width="200" Text="{Binding Password, Mode=TwoWay}"/>
+            <Button Width="200" Command="{Binding LoginCommand}">Connect</Button>
+        </StackPanel>
     </Grid>
 </UserControl>
