@@ -1,10 +1,6 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
-using benais_jWPF_Medecin.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using benais_jWPF_Medecin.Model.Enum;
+using benais_jWPF_Medecin.ViewModel.Pattern;
 using System.Windows;
 using System.Windows.Input;
 
@@ -63,6 +59,7 @@ namespace benais_jWPF_Medecin.ViewModel
             {
                 string message = (_loginBM.Connect(Login, Password)) ? "Success login" : "Fail login";
                 MessageBox.Show(message);
+                ConnexionMediator.Notify("Change_Main_UC", EUserControl.MAIN, Login);
             }
         }
         #endregion

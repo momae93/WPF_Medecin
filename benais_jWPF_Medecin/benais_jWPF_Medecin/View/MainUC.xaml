@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Width="200" Command="{Binding LoginCommand}">Connect</Button>
+            <Button Width="200" Command="{Binding LogoutCommand}">Logout</Button>
         </StackPanel>
     </Grid>
 </UserControl>

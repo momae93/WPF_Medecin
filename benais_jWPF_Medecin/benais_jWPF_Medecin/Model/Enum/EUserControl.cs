@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.Model.Enum
 {
-    class EUserControl
+    public enum EUserControl
     {
+        LOGIN,
+        MAIN
     }
 }
