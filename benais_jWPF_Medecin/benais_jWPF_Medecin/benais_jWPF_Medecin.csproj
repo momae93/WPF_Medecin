@@ -75,6 +75,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Pattern\Mediator.cs" />
+    <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="View\Converters\ByteToImageConverter.cs" />
     <Compile Include="View\LoginUC.xaml.cs">
       <DependentUpon>LoginUC.xaml</DependentUpon>

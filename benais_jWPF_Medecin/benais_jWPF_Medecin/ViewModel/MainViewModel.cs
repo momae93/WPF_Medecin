@@ -98,7 +98,7 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void LoadUsersView()
         {
-            CurrentUC = new MainUsersUC();
+            CurrentUC = new MainUsersUC(_login);
         }
         private void LoadPatientsView()
         {

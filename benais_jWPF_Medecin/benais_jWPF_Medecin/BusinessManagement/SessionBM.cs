@@ -31,5 +31,15 @@ namespace benais_jWPF_Medecin.BusinessManagement
         {
             return new UserDA().GetUser(_login);
         }
+
+        public User[] GetListUser()
+        {
+            return new UserDA().GetListUser();
+        }
+
+        public bool DeleteUser(string login)
+        {
+            return new UserDA().DeleteUser(login);
+        }
     }
 }

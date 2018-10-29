@@ -57,9 +57,12 @@ namespace benais_jWPF_Medecin.ViewModel
                 MessageBox.Show("Fields are empty");
             else
             {
-                string message = (_loginBM.Connect(Login, Password)) ? "Success login" : "Fail login";
+                bool connect = _loginBM.Connect(Login, Password);
+                string message = (connect) ? "Success login" : "Fail login";
                 MessageBox.Show(message);
-                Mediator.Notify("Change_Main_UC", EUserControl.MAIN, Login);
+
+                if (connect)
+                    Mediator.Notify("Change_Main_UC", EUserControl.MAIN, Login);
             }
         }
         #endregion

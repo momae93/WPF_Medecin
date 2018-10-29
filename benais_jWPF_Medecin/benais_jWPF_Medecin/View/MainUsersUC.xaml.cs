@@ -1,4 +1,5 @@
-﻿using System;
+﻿using benais_jWPF_Medecin.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,10 @@ namespace benais_jWPF_Medecin.View
     /// </summary>
     public partial class MainUsersUC : UserControl
     {
-        public MainUsersUC()
+        public MainUsersUC(string login)
         {
             InitializeComponent();
+            this.DataContext = new UsersViewModel(login);
         }
     }
 }
