@@ -1,5 +1,7 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
+using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.ServiceUserReference;
+using benais_jWPF_Medecin.ViewModel.Pattern;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,7 +56,7 @@ namespace benais_jWPF_Medecin.ViewModel
             _sessionBM = new SessionBM(login);
             UserList = new ObservableCollection<User>(_sessionBM.GetListUser());
             DeleteUserCommand = new RelayCommand(param => DeleteUser(), param => true);
-            AddUserCommand = new RelayCommand(param => DeleteUser(), param => true);
+            AddUserCommand = new RelayCommand(param => ChangeView(), param => true);
             SelectedUser = null;
         }
 
@@ -90,9 +92,9 @@ namespace benais_jWPF_Medecin.ViewModel
             get { return _addUserCommand; }
             set { _addUserCommand = value; }
         }
-        private void AddUser()
+        private void ChangeView()
         {
-
+            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS_ADD, _login);
         }
 
         #endregion

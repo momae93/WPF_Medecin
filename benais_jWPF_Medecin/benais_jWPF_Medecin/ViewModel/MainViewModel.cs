@@ -1,4 +1,4 @@
-﻿using benais_jWPF_Medecin.BusinessManagement;
+﻿    using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.ServiceUserReference;
 using benais_jWPF_Medecin.View;
@@ -75,6 +75,8 @@ namespace benais_jWPF_Medecin.ViewModel
 
             InitializeUser();
             LoadUsersView();
+
+            Mediator.Register("Change_Main_UC", OnChangeView);
         }
 
         #endregion
@@ -89,7 +91,7 @@ namespace benais_jWPF_Medecin.ViewModel
             if (_sessionBM.Disconnect())
             {
                 MessageBox.Show("Success logout");
-                Mediator.Notify("Change_Main_UC", EUserControl.LOGIN, _login);
+                Mediator.Notify("Change_MainWindow_UC", EUserControl.LOGIN, _login);
             }
             else
             {
@@ -121,6 +123,31 @@ namespace benais_jWPF_Medecin.ViewModel
             }
         }
 
+        public void OnChangeView(EUserControl userControl, object param)
+        {
+            try
+            {
+                switch (userControl)
+                {
+                    case EUserControl.MAIN_USERS:
+                        CurrentUC = new MainUsersUC(_login);
+                        break;
+                    case EUserControl.MAIN_USERS_ADD:
+                        CurrentUC = new MainAddUser(_login);
+                        break;
+                    case EUserControl.MAIN_PATIENTS:
+                        CurrentUC = new MainPatientsUC();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed changing view");
+                throw;
+            }
+        }
         #endregion
     }
 }

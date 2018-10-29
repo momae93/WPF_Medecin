@@ -23,7 +23,7 @@ namespace benais_jWPF_Medecin.ViewModel
         public MainWindowViewModel()
         {
             CurrentUC = new LoginUC();
-            Mediator.Register("Change_Main_UC", OnConnectView);
+            Mediator.Register("Change_MainWindow_UC", OnConnectView);
         }
 
         public void OnConnectView(EUserControl userControl, object login)

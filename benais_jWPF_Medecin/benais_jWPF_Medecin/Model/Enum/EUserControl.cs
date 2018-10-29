@@ -11,6 +11,7 @@ namespace benais_jWPF_Medecin.Model.Enum
         LOGIN,
         MAIN,
         MAIN_USERS,
-        MAIN_PATIENTS
+        MAIN_USERS_ADD,
+        MAIN_PATIENTS,
     }
 }

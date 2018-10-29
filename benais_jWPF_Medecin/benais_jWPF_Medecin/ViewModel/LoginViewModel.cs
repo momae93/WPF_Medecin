@@ -62,7 +62,7 @@ namespace benais_jWPF_Medecin.ViewModel
                 MessageBox.Show(message);
 
                 if (connect)
-                    Mediator.Notify("Change_Main_UC", EUserControl.MAIN, Login);
+                    Mediator.Notify("Change_MainWindow_UC", EUserControl.MAIN, Login);
             }
         }
         #endregion
