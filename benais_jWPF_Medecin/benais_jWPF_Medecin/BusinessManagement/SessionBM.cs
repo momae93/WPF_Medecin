@@ -1,4 +1,5 @@
 ﻿using benais_jWPF_Medecin.DataAccess;
+using benais_jWPF_Medecin.ServiceUserReference;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace benais_jWPF_Medecin.BusinessManagement
         public bool Disconnect()
         {
             return new UserDA().Disconnect(_login);
+        }
+
+        public User GetUser()
+        {
+            return new UserDA().GetUser(_login);
         }
     }
 }

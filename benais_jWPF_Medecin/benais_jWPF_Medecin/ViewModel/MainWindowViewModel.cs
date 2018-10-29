@@ -2,6 +2,7 @@
 using benais_jWPF_Medecin.View;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace benais_jWPF_Medecin.ViewModel
@@ -22,10 +23,10 @@ namespace benais_jWPF_Medecin.ViewModel
         public MainWindowViewModel()
         {
             CurrentUC = new LoginUC();
-            ConnexionMediator.Register("Change_Main_UC", OnConnectView);
+            Mediator.Register("Change_Main_UC", OnConnectView);
         }
 
-        public void OnConnectView(EUserControl userControl, string login)
+        public void OnConnectView(EUserControl userControl, object login)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace benais_jWPF_Medecin.ViewModel
                         CurrentUC = new LoginUC();
                         break;
                     case EUserControl.MAIN:
-                        CurrentUC = new MainUC(login);
+                        CurrentUC = new MainUC((string)login);
                         break;
                     default:
                         break;
@@ -43,6 +44,7 @@ namespace benais_jWPF_Medecin.ViewModel
             }
             catch (Exception)
             {
+                MessageBox.Show("Failed changing view");
                 throw;
             }
         }

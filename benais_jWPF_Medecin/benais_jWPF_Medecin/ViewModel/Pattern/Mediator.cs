@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.ViewModel.Pattern
 {
-    static public class ConnexionMediator
+    static public class Mediator
     {
-        static IDictionary<string, List<Action<EUserControl, string>>> callbacks = new Dictionary<string, List<Action<EUserControl, string>>>();
+        static IDictionary<string, List<Action<EUserControl, object>>> callbacks = new Dictionary<string, List<Action<EUserControl, object>>>();
 
-        static public void Register(string token, Action<EUserControl, string> callback)
+        static public void Register(string token, Action<EUserControl, object> callback)
         {
             if (!callbacks.ContainsKey(token))
             {
-                var list = new List<Action<EUserControl, string>>();
+                var list = new List<Action<EUserControl, object>>();
                 list.Add(callback);
                 callbacks.Add(token, list);
             }
@@ -30,17 +30,17 @@ namespace benais_jWPF_Medecin.ViewModel.Pattern
             }
         }
 
-        static public void Unregister(string token, Action<EUserControl, string> callback)
+        static public void Unregister(string token, Action<EUserControl, object> callback)
         {
             if (callbacks.ContainsKey(token))
                 callbacks[token].Remove(callback);
         }
 
-        static public void Notify(string token, EUserControl userControl, string login)
+        static public void Notify(string token, EUserControl userControl, object param)
         {
             if (callbacks.ContainsKey(token))
                 foreach (var callback in callbacks[token])
-                    callback(userControl, login);
+                    callback(userControl, param);
         }
     }
 }

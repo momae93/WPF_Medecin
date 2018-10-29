@@ -54,7 +54,6 @@ namespace benais_jWPF_Medecin.DataAccess
         public string GetRole(string login)
         {
             return _service.GetRole(login);
-            return _service.GetRole(login);
         }
     }
 }

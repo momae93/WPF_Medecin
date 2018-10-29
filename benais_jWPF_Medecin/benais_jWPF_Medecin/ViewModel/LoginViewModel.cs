@@ -59,7 +59,7 @@ namespace benais_jWPF_Medecin.ViewModel
             {
                 string message = (_loginBM.Connect(Login, Password)) ? "Success login" : "Fail login";
                 MessageBox.Show(message);
-                ConnexionMediator.Notify("Change_Main_UC", EUserControl.MAIN, Login);
+                Mediator.Notify("Change_Main_UC", EUserControl.MAIN, Login);
             }
         }
         #endregion

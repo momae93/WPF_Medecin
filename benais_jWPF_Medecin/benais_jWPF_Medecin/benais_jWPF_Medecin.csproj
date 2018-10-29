@@ -74,12 +74,20 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\Pattern\ConnexionMediator.cs" />
     <Compile Include="ViewModel\Pattern\Mediator.cs" />
+    <Compile Include="View\Converters\ByteToImageConverter.cs" />
     <Compile Include="View\LoginUC.xaml.cs">
       <DependentUpon>LoginUC.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\MainPatientsUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainUsersUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,8 +99,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\MainPatientsUC.xaml.cs">
+      <DependentUpon>MainPatientsUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainUC.xaml.cs">
       <DependentUpon>MainUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainUsersUC.xaml.cs">
+      <DependentUpon>MainUsersUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

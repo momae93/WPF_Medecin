@@ -4,11 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:benais_jWPF_Medecin.View"
+             xmlns:converter="clr-namespace:benais_jWPF_Medecin.View.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:ByteToImageConverter x:Key="imgConverter"/>
+    </UserControl.Resources>
+    
     <Grid>
-        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.7*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Background="#FF1B2734" Orientation="Vertical">
+            <Ellipse Width="128" Height="128">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding CurrentUser.Picture, Converter={StaticResource imgConverter}}"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding CurrentUser.Firstname}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Text="{Binding CurrentUser.Name}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </StackPanel>
             <Button Width="200" Command="{Binding LogoutCommand}">Logout</Button>
+            <Button Width="200" Command="{Binding UsersViewCommand}">Users</Button>
+            <Button Width="200" Command="{Binding PatientsViewCommand}">Patients</Button>
         </StackPanel>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentUC}"/>
     </Grid>
 </UserControl>

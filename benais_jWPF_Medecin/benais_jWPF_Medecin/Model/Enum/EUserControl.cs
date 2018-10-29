@@ -9,6 +9,8 @@ namespace benais_jWPF_Medecin.Model.Enum
     public enum EUserControl
     {
         LOGIN,
-        MAIN
+        MAIN,
+        MAIN_USERS,
+        MAIN_PATIENTS
     }
 }
