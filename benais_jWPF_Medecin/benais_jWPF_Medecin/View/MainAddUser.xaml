@@ -17,7 +17,7 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
+        <Button Grid.Row="0" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <TextBox Width="200" Text="{Binding Name, Mode=TwoWay}"/>
             <TextBox Width="200" Text="{Binding Firstname, Mode=TwoWay}"/>

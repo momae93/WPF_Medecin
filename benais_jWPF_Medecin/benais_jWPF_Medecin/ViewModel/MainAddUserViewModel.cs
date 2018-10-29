@@ -90,8 +90,10 @@ namespace benais_jWPF_Medecin.ViewModel
         {
             _currentLogin = login;
             _sessionBM = new SessionBM(login);
+
             AddUserCommand = new RelayCommand(param => AddUser(), param => true);
             LoadImageCommand = new RelayCommand(param => LoadImage(), param => true);
+            BackCommand = new RelayCommand(param => Back(), param => true);
         }
 
         #endregion
@@ -149,6 +151,17 @@ namespace benais_jWPF_Medecin.ViewModel
                 BitmapImage img = new BitmapImage(new Uri(dialog.FileName));
                 Image = ImageToByteArray.Convert(img);
             }
+        }
+
+        private ICommand _backCommand;
+        public ICommand BackCommand
+        {
+            get { return _backCommand; }
+            set { _backCommand = value; }
+        }
+        private void Back()
+        {
+            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS, Login);
         }
 
         #endregion
