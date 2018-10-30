@@ -2,6 +2,7 @@
 using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.ServiceUserReference;
 using benais_jWPF_Medecin.View;
+using benais_jWPF_Medecin.View.Patient;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using System;
 using System.Windows;
@@ -139,7 +140,7 @@ namespace benais_jWPF_Medecin.ViewModel
                         CurrentUC = new MainPatientsUC(_login);
                         break;
                     case EUserControl.MAIN_PATIENTS_ADD:
-                        MessageBox.Show("Add patient ! ");
+                        CurrentUC = new AddPatientUC(_login);
                         break;
                     default:
                         break;

@@ -50,6 +50,7 @@ namespace benais_jWPF_Medecin.ViewModel
 
         public PatientsViewModel(string login)
         {
+            this._login = login;
             _patientBM = new PatientBM();
             PatientList = new ObservableCollection<Patient>(_patientBM.GetListPatient());
             DeletePatientCommand = new RelayCommand(param => DeletePatient(), param => true);
