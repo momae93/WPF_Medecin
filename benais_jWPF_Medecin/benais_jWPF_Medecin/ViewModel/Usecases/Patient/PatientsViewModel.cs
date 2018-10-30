@@ -16,7 +16,7 @@ namespace benais_jWPF_Medecin.ViewModel
     {
         #region Variables
 
-        private string _login;
+        private string _currentLogin;
         private PatientBM _patientBM;
         private ObservableCollection<Patient> _patientList;
         private Patient selectedPatient;
@@ -50,11 +50,12 @@ namespace benais_jWPF_Medecin.ViewModel
 
         public PatientsViewModel(string login)
         {
-            this._login = login;
+            this._currentLogin = login;
             _patientBM = new PatientBM();
             PatientList = new ObservableCollection<Patient>(_patientBM.GetListPatient());
             DeletePatientCommand = new RelayCommand(param => DeletePatient(), param => true);
             AddPatientCommand = new RelayCommand(param => ChangeView(), param => true);
+            DetailsPatientCommand = new RelayCommand(param => ShowPatientDetails(), param => true);
             SelectedPatient = null;
         }
 
@@ -92,7 +93,19 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void ChangeView()
         {
-            Mediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_ADD, _login);
+            Mediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_ADD, _currentLogin);
+        }
+
+        private ICommand _detailsCommand;
+        public ICommand DetailsPatientCommand
+        {
+            get { return _detailsCommand; }
+            set { _detailsCommand = value; }
+        }
+        private void ShowPatientDetails()
+        {
+            if (SelectedPatient != null)
+                Mediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_DETAILS, SelectedPatient.Id);
         }
 
         #endregion

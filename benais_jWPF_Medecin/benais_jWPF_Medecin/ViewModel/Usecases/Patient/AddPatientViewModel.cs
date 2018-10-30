@@ -82,7 +82,7 @@ namespace benais_jWPF_Medecin.ViewModel
         {
             if (!Name.IsNullOrWhiteSpace() && !Firstname.IsNullOrWhiteSpace() && Birthday != null)
             {
-                Patient patient = new Patient() { Name = Name, Firstname = Firstname, Birthday = Birthday };
+                Patient patient = new Patient() { Name = Name, Firstname = Firstname, Birthday = Birthday, Observations = new List<Observation>().ToArray() };
                 if (_patientBM.AddPatient(patient))
                     Mediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
                 else

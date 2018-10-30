@@ -79,7 +79,8 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\Usecases\Patient\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Patient\DetailsPatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\User\AddUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -89,10 +90,14 @@
     <Compile Include="ViewModel\Utils\StringExtension.cs" />
     <Compile Include="View\Converters\ByteToImageConverter.cs" />
     <Compile Include="View\Converters\ImageToByteArray.cs" />
-    <Compile Include="View\Login\LoginUC.xaml.cs">
+    <Compile Include="View\Usecases\Login\LoginUC.xaml.cs">
       <DependentUpon>LoginUC.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Usecases\Patient\AddPatientUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Usecases\Patient\DetailsPatientUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +128,9 @@
     <Compile Include="View\Usecases\Patient\AddPatientUC.xaml.cs">
       <DependentUpon>AddPatientUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Usecases\Patient\DetailsPatientUC.xaml.cs">
+      <DependentUpon>DetailsPatientUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usecases\User\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>
     </Compile>
@@ -139,7 +147,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Login\LoginUC.xaml">
+    <Page Include="View\Usecases\Login\LoginUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
