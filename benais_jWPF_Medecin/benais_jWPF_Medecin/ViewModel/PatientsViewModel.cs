@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace benais_jWPF_Medecin.ViewModel
@@ -51,7 +52,7 @@ namespace benais_jWPF_Medecin.ViewModel
         {
             _patientBM = new PatientBM();
             PatientList = new ObservableCollection<Patient>(_patientBM.GetListPatient());
-            //DeletePatientCommand = new RelayCommand(param => DeletePatient(), param => true);
+            DeletePatientCommand = new RelayCommand(param => DeletePatient(), param => true);
             AddPatientCommand = new RelayCommand(param => ChangeView(), param => true);
             SelectedPatient = null;
         }
@@ -60,27 +61,27 @@ namespace benais_jWPF_Medecin.ViewModel
 
         #region Command
 
-        //private ICommand _deletePatientCommand;
-        //public ICommand DeletePatientCommand
-        //{
-        //    get { return _deletePatientCommand; }
-        //    set { _deletePatientCommand = value; }
-        //}
-        //private void DeletePatient()
-        //{
-        //    if (SelectedPatient != null)
-        //    {
-        //        bool isDeleted = _patientBM.DeleteUser(SelectedPatient.Login);
-        //        if (isDeleted)
-        //        {
-        //            UserList.Remove(SelectedPatient);
-        //            SelectedPatient = null;
-        //            MessageBox.Show("Deleted");
-        //        }
-        //        else
-        //            MessageBox.Show("Fail delete user");
-        //    }
-        //}
+        private ICommand _deletePatientCommand;
+        public ICommand DeletePatientCommand
+        {
+            get { return _deletePatientCommand; }
+            set { _deletePatientCommand = value; }
+        }
+        private void DeletePatient()
+        {
+            if (SelectedPatient != null)
+            {
+                bool isDeleted = _patientBM.DeletePatient(SelectedPatient.Id);
+                if (isDeleted)
+                {
+                    PatientList.Remove(SelectedPatient);
+                    SelectedPatient = null;
+                    MessageBox.Show("Deleted");
+                }
+                else
+                    MessageBox.Show("Fail delete user");
+            }
+        }
 
         private ICommand _addPatientCommand;
         public ICommand AddPatientCommand
