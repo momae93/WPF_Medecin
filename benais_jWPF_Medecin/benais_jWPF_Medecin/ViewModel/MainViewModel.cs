@@ -104,7 +104,7 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void LoadPatientsView()
         {
-            CurrentUC = new MainPatientsUC();
+            CurrentUC = new MainPatientsUC(_login);
         }
 
         #endregion
@@ -136,7 +136,10 @@ namespace benais_jWPF_Medecin.ViewModel
                         CurrentUC = new MainAddUser(_login);
                         break;
                     case EUserControl.MAIN_PATIENTS:
-                        CurrentUC = new MainPatientsUC();
+                        CurrentUC = new MainPatientsUC(_login);
+                        break;
+                    case EUserControl.MAIN_PATIENTS_ADD:
+                        MessageBox.Show("Add patient ! ");
                         break;
                     default:
                         break;

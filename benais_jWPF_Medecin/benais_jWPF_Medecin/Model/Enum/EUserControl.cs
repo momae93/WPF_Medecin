@@ -13,5 +13,6 @@ namespace benais_jWPF_Medecin.Model.Enum
         MAIN_USERS,
         MAIN_USERS_ADD,
         MAIN_PATIENTS,
+        MAIN_PATIENTS_ADD,
     }
 }

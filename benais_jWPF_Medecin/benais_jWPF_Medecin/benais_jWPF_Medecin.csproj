@@ -60,12 +60,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessManagement\LoginBM.cs" />
+    <Compile Include="BusinessManagement\PatientBM.cs" />
     <Compile Include="BusinessManagement\SessionBM.cs" />
+    <Compile Include="Connected Services\ServicePatientReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServiceUserReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\PatientDA.cs" />
     <Compile Include="DataAccess\UserDA.cs" />
     <Compile Include="Model\Enum\EUserControl.cs" />
     <Compile Include="NotifyPropertyChanged.cs" />
@@ -75,19 +82,20 @@
     <Compile Include="ViewModel\MainAddUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\PatientsViewModel.cs" />
     <Compile Include="ViewModel\Pattern\Mediator.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="ViewModel\Utils\StringExtension.cs" />
     <Compile Include="View\Converters\ByteToImageConverter.cs" />
     <Compile Include="View\Converters\ImageToByteArray.cs" />
-    <Compile Include="View\LoginUC.xaml.cs">
+    <Compile Include="View\Login\LoginUC.xaml.cs">
       <DependentUpon>LoginUC.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\MainAddUser.xaml">
+    <Page Include="View\User\MainAddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainPatientsUC.xaml">
+    <Page Include="View\Patient\MainPatientsUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,7 +103,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainUsersUC.xaml">
+    <Page Include="View\User\MainUsersUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,23 +115,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\MainAddUser.xaml.cs">
+    <Compile Include="View\User\MainAddUser.xaml.cs">
       <DependentUpon>MainAddUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainPatientsUC.xaml.cs">
+    <Compile Include="View\Patient\MainPatientsUC.xaml.cs">
       <DependentUpon>MainPatientsUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainUC.xaml.cs">
       <DependentUpon>MainUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainUsersUC.xaml.cs">
+    <Compile Include="View\User\MainUsersUC.xaml.cs">
       <DependentUpon>MainUsersUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\LoginUC.xaml">
+    <Page Include="View\Login\LoginUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,6 +154,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ServicePatientReference\benais_jWPF_Medecin.ServicePatientReference.Patient.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicePatientReference\ServicePatient.wsdl" />
+    <None Include="Connected Services\ServicePatientReference\ServicePatient.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicePatientReference\ServicePatient1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicePatientReference\ServicePatient2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServicePatientReference\ServicePatient3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceUserReference\benais_jWPF_Medecin.ServiceUserReference.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -167,11 +191,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Connected Services\ServicePatientReference\ServicePatient.disco" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicePatientReference\" />
     <WCFMetadataStorage Include="Connected Services\ServiceUserReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +212,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceUserReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePatientReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePatientReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServicePatientReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
