@@ -19,7 +19,7 @@ namespace benais_jWPF_Medecin.ViewModel
 
         private SessionBM _sessionBM;
 
-        private string _login;
+        private string _currentLogin;
         private ObservableCollection<User> _userList;
         private User _selectedUser;
         
@@ -52,7 +52,7 @@ namespace benais_jWPF_Medecin.ViewModel
 
         public UsersViewModel(string login)
         {
-            _login = login;
+            _currentLogin = login;
             _sessionBM = new SessionBM(login);
             UserList = new ObservableCollection<User>(_sessionBM.GetListUser());
             DeleteUserCommand = new RelayCommand(param => DeleteUser(), param => true);
@@ -94,7 +94,7 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void ChangeView()
         {
-            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS_ADD, _login);
+            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS_ADD, _currentLogin);
         }
 
         #endregion

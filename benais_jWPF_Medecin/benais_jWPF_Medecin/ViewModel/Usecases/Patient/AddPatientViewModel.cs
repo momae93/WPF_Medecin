@@ -46,7 +46,6 @@ namespace benais_jWPF_Medecin.ViewModel
                 OnPropertyChanged(nameof(Firstname));
             }
         }
-
         public DateTime Birthday
         {
             get { return _birthday; }
@@ -71,7 +70,7 @@ namespace benais_jWPF_Medecin.ViewModel
         #region Command
 
         /// <summary>
-        /// Add new user if fields are corrects
+        /// Add new patient if fields are corrects
         /// </summary>
         private ICommand _addPatientCommand;
         public ICommand AddPatientCommand
@@ -95,6 +94,9 @@ namespace benais_jWPF_Medecin.ViewModel
             }
         }
 
+        /// <summary>
+        /// Load patients user control
+        /// </summary>
         private ICommand _backCommand;
         public ICommand BackCommand
         {

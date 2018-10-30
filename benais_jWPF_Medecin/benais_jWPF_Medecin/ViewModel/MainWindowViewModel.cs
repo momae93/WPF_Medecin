@@ -9,7 +9,14 @@ namespace benais_jWPF_Medecin.ViewModel
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        #region Variable
+
         private UserControl _currentUC;
+
+        #endregion
+
+        #region Getter/Setter
+
         public UserControl CurrentUC
         {
             get { return _currentUC; }
@@ -20,11 +27,19 @@ namespace benais_jWPF_Medecin.ViewModel
             }
         }
 
+        #endregion
+
+        #region Constructor
+
         public MainWindowViewModel()
         {
             CurrentUC = new LoginUC();
             Mediator.Register("Change_MainWindow_UC", OnConnectView);
         }
+
+        #endregion
+
+        #region Method
 
         public void OnConnectView(EUserControl userControl, object login)
         {
@@ -48,5 +63,7 @@ namespace benais_jWPF_Medecin.ViewModel
                 throw;
             }
         }
+
+        #endregion
     }
 }

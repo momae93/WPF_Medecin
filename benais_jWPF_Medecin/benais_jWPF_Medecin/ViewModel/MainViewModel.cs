@@ -101,11 +101,11 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void LoadUsersView()
         {
-            CurrentUC = new MainUsersUC(_login);
+            CurrentUC = new UsersUC(_login);
         }
         private void LoadPatientsView()
         {
-            CurrentUC = new MainPatientsUC(_login);
+            CurrentUC = new PatientsUC(_login);
         }
 
         #endregion
@@ -131,13 +131,13 @@ namespace benais_jWPF_Medecin.ViewModel
                 switch (userControl)
                 {
                     case EUserControl.MAIN_USERS:
-                        CurrentUC = new MainUsersUC(_login);
+                        CurrentUC = new UsersUC(_login);
                         break;
                     case EUserControl.MAIN_USERS_ADD:
-                        CurrentUC = new MainAddUser(_login);
+                        CurrentUC = new AddUserUC(_login);
                         break;
                     case EUserControl.MAIN_PATIENTS:
-                        CurrentUC = new MainPatientsUC(_login);
+                        CurrentUC = new PatientsUC(_login);
                         break;
                     case EUserControl.MAIN_PATIENTS_ADD:
                         CurrentUC = new AddPatientUC(_login);

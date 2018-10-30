@@ -4,14 +4,14 @@ using System.Windows.Controls;
 namespace benais_jWPF_Medecin.View
 {
     /// <summary>
-    /// Logique d'interaction pour MainPatientsUC.xaml
+    /// Logique d'interaction pour MainAddUser.xaml
     /// </summary>
-    public partial class MainPatientsUC : UserControl
+    public partial class AddUserUC : UserControl
     {
-        public MainPatientsUC(string login)
+        public AddUserUC(string login)
         {
             InitializeComponent();
-            this.DataContext = new PatientsViewModel(login);
+            this.DataContext = new MainAddUserViewModel(login);
         }
     }
 }
