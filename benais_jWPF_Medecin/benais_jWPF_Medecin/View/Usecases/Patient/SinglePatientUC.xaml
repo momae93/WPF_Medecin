@@ -20,7 +20,7 @@
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Observations</TextBlock>
             </TabItem>
             <TabItem Header="Graph">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Graph</TextBlock>
+                <ContentControl Content="{Binding ChartUC}"/>
             </TabItem>
         </TabControl>
     </Grid>

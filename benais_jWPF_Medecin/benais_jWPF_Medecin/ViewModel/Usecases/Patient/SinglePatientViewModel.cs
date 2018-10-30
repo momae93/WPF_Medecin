@@ -20,7 +20,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 
         private UserControl _detailsUC;
         private UserControl _observationsUC;
-        private UserControl _graphUC;
+        private UserControl _chartUC;
 
         #endregion
 
@@ -44,13 +44,13 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(ObservationsUC));
             }
         }
-        public UserControl GraphUC
+        public UserControl ChartUC
         {
-            get { return _graphUC; }
+            get { return _chartUC; }
             set
             {
-                _graphUC = value;
-                OnPropertyChanged(nameof(GraphUC));
+                _chartUC = value;
+                OnPropertyChanged(nameof(ChartUC));
             }
         }
 
@@ -63,7 +63,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             _currentLogin = login;
             _idPatient = idPatient;
             DetailsUC = new DetailsPatientUC(login, idPatient);
-
+            ChartUC = new ChartPatientUC(login, idPatient);
             BackCommand = new RelayCommand(param => Back(), param => true);
         }
 
