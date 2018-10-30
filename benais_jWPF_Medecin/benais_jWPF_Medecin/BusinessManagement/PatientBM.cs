@@ -14,5 +14,20 @@ namespace benais_jWPF_Medecin.BusinessManagement
         {
             return new PatientDA().GetListPatient();
         }
+
+        public Patient GetPatient(int id)
+        {
+            return new PatientDA().GetPatient(id);
+        }
+
+        public bool AddPatient(Patient patient)
+        {
+            return new PatientDA().AddPatient(patient);
+        }
+
+        public bool DeletePatient(int id)
+        {
+            return new PatientDA().DeletePatient(id);
+        }
     }
 }
