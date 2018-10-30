@@ -143,8 +143,8 @@ namespace benais_jWPF_Medecin.ViewModel
                     case EUserControl.MAIN_PATIENTS_ADD:
                         CurrentUC = new AddPatientUC(_login);
                         break;
-                    case EUserControl.MAIN_PATIENTS_DETAILS:
-                        CurrentUC = new DetailsPatientUC(_login, (int) param);
+                    case EUserControl.MAIN_PATIENTS_SINGLE:
+                        CurrentUC = new SinglePatientUC(_login, (int) param);
                         break;
                     default:
                         break;

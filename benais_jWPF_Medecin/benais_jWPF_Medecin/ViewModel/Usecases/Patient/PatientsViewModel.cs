@@ -105,7 +105,7 @@ namespace benais_jWPF_Medecin.ViewModel
         private void ShowPatientDetails()
         {
             if (SelectedPatient != null)
-                Mediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_DETAILS, SelectedPatient.Id);
+                Mediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_SINGLE, SelectedPatient.Id);
         }
 
         #endregion

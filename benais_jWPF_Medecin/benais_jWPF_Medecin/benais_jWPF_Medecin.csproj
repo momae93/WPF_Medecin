@@ -81,6 +81,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\DetailsPatientViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Patient\SinglePatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\User\AddUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -98,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Usecases\Patient\DetailsPatientUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Usecases\Patient\SinglePatientUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,6 +135,9 @@
     </Compile>
     <Compile Include="View\Usecases\Patient\DetailsPatientUC.xaml.cs">
       <DependentUpon>DetailsPatientUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usecases\Patient\SinglePatientUC.xaml.cs">
+      <DependentUpon>SinglePatientUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usecases\User\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>

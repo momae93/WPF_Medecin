@@ -53,25 +53,6 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             _idPatient = idPatient;
             _patientBM = new PatientBM();
             InitializePatient(idPatient);
-            BackCommand = new RelayCommand(param => Back(), param => true);
-        }
-
-        #endregion
-
-        #region Command
-
-        /// <summary>
-        /// Load patients user control
-        /// </summary>
-        private ICommand _backCommand;
-        public ICommand BackCommand
-        {
-            get { return _backCommand; }
-            set { _backCommand = value; }
-        }
-        private void Back()
-        {
-            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
         }
 
         #endregion
