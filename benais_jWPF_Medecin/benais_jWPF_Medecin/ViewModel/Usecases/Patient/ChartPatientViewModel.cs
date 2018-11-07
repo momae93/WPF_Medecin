@@ -18,7 +18,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private string _currentLogin;
         private int _idPatient;
         private PatientBM _patientBM;
-        private SeriesCollection _seriesCollection;
+        private SeriesCollection _seriesCollection; 
         private List<string> _dates;
 
         #endregion

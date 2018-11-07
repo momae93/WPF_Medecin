@@ -22,6 +22,9 @@
             <TabItem Header="Graph">
                 <ContentControl Content="{Binding ChartUC}"/>
             </TabItem>
+            <TabItem Header="Live data">
+                <ContentControl Content="{Binding LiveUC}"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

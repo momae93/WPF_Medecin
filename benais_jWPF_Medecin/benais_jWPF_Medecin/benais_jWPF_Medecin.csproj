@@ -68,6 +68,11 @@
     <Compile Include="BusinessManagement\LoginBM.cs" />
     <Compile Include="BusinessManagement\PatientBM.cs" />
     <Compile Include="BusinessManagement\SessionBM.cs" />
+    <Compile Include="Connected Services\ServiceLiveReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServicePatientReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,6 +93,7 @@
     <Compile Include="ViewModel\Usecases\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\ChartPatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\DetailsPatientViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Patient\LivePatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\SinglePatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\User\AddUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -98,6 +104,7 @@
     <Compile Include="ViewModel\Utils\StringExtension.cs" />
     <Compile Include="View\Converters\ByteToImageConverter.cs" />
     <Compile Include="View\Converters\ImageToByteArray.cs" />
+    <Compile Include="View\Converters\InversionBooleanConverter.cs" />
     <Compile Include="View\Usecases\Login\LoginUC.xaml.cs">
       <DependentUpon>LoginUC.xaml</DependentUpon>
     </Compile>
@@ -110,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Usecases\Patient\DetailsPatientUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Usecases\Patient\LivePatientUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,6 +160,9 @@
     </Compile>
     <Compile Include="View\Usecases\Patient\DetailsPatientUC.xaml.cs">
       <DependentUpon>DetailsPatientUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usecases\Patient\LivePatientUC.xaml.cs">
+      <DependentUpon>LivePatientUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usecases\Patient\SinglePatientUC.xaml.cs">
       <DependentUpon>SinglePatientUC.xaml</DependentUpon>
@@ -192,6 +206,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ServiceLiveReference\ServiceLive.wsdl" />
+    <None Include="Connected Services\ServiceLiveReference\ServiceLive.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceLiveReference\ServiceLive1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicePatientReference\benais_jWPF_Medecin.ServicePatientReference.Patient.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -237,6 +258,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceLiveReference\" />
     <WCFMetadataStorage Include="Connected Services\ServicePatientReference\" />
     <WCFMetadataStorage Include="Connected Services\ServiceUserReference\" />
   </ItemGroup>
@@ -263,6 +285,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServicePatientReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceLiveReference\ServiceLive.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceLiveReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceLiveReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceLiveReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

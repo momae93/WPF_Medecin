@@ -21,7 +21,8 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private UserControl _detailsUC;
         private UserControl _observationsUC;
         private UserControl _chartUC;
-
+        private UserControl _liveUC;
+        
         #endregion
 
         #region Getters/Setters
@@ -53,6 +54,15 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(ChartUC));
             }
         }
+        public UserControl LiveUC
+        {
+            get { return _liveUC; }
+            set
+            {
+                _liveUC = value;
+                OnPropertyChanged(nameof(LiveUC));
+            }
+        }
 
         #endregion
 
@@ -64,6 +74,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             _idPatient = idPatient;
             DetailsUC = new DetailsPatientUC(login, idPatient);
             ChartUC = new ChartPatientUC(login, idPatient);
+            LiveUC = new LivePatientUC(login, idPatient);
             BackCommand = new RelayCommand(param => Back(), param => true);
         }
 
