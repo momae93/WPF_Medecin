@@ -17,7 +17,7 @@ namespace benais_jWPF_Medecin.ViewModel
     {
         #region Variables
 
-        private SessionBM _sessionBM;
+        private UserBM _sessionBM;
 
         private string _currentLogin;
         private ObservableCollection<User> _userList;
@@ -53,7 +53,7 @@ namespace benais_jWPF_Medecin.ViewModel
         public UsersViewModel(string login)
         {
             _currentLogin = login;
-            _sessionBM = new SessionBM(login);
+            _sessionBM = new UserBM(login);
             UserList = new ObservableCollection<User>(_sessionBM.GetListUser());
             DeleteUserCommand = new RelayCommand(param => DeleteUser(), param => true);
             AddUserCommand = new RelayCommand(param => ChangeView(), param => true);

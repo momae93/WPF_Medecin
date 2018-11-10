@@ -21,7 +21,7 @@ namespace benais_jWPF_Medecin.ViewModel
         #region Variables
 
         private string _currentLogin;
-        private SessionBM _sessionBM;
+        private UserBM _sessionBM;
 
         private string _name;
         private string _firstname;
@@ -89,7 +89,7 @@ namespace benais_jWPF_Medecin.ViewModel
         public MainAddUserViewModel(string login)
         {
             _currentLogin = login;
-            _sessionBM = new SessionBM(login);
+            _sessionBM = new UserBM(login);
 
             AddUserCommand = new RelayCommand(param => AddUser(), param => true);
             LoadImageCommand = new RelayCommand(param => LoadImage(), param => true);

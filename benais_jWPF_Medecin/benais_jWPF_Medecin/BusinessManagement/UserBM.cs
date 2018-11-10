@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.BusinessManagement
 {
-    public class SessionBM
+    public class UserBM
     {
         private string _login;
 
-        public SessionBM(string login)
+        public UserBM(string login)
         {
             this._login = login;
         }

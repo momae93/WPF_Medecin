@@ -10,9 +10,7 @@ namespace benais_jWPF_Medecin.BusinessManagement
     public class LoginBM
     {
         public LoginBM()
-        {
-
-        }
+        { }
 
         /// <summary>
         /// Call data access layer connect
