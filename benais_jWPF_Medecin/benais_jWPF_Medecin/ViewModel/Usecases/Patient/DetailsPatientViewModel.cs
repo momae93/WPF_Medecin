@@ -1,12 +1,4 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
-using benais_jWPF_Medecin.Model.Enum;
-using benais_jWPF_Medecin.ViewModel.Pattern;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {

@@ -3,11 +3,8 @@ using benais_jWPF_Medecin.ServicePatientReference;
 using LiveCharts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {

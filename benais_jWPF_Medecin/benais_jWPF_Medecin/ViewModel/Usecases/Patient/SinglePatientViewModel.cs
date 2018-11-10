@@ -1,11 +1,6 @@
 ﻿using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.View.Usecases.Patient;
 using benais_jWPF_Medecin.ViewModel.Pattern;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 

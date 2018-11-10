@@ -1,4 +1,4 @@
-﻿    using benais_jWPF_Medecin.BusinessManagement;
+﻿using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.ServiceUserReference;
 using benais_jWPF_Medecin.View;
