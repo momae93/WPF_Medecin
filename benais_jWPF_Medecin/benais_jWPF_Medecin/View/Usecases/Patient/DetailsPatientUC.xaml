@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+        <ContentControl Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}" Style="{StaticResource LoadingContentControl}"></ContentControl>
+        <StackPanel Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}" Orientation="Vertical" VerticalAlignment="Center">
             <TextBlock Width="200" Text="{Binding SelectedPatient.Name, Mode=TwoWay}"/>
             <TextBlock Width="200" Text="{Binding SelectedPatient.Firstname, Mode=TwoWay}"/>
             <TextBlock Width="200" Text="{Binding SelectedPatient.Birthday, Mode=TwoWay}"/>

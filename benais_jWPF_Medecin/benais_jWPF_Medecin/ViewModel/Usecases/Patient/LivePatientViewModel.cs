@@ -3,6 +3,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {
@@ -18,6 +19,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private SeriesCollection _heartbeatCollection;
         private ObservableCollection<string> _heartbeatDates;
         private bool _isLiveHeatbeat;
+        private bool _isLoading;
 
         #endregion
 
@@ -69,6 +71,15 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 ResetData(value);
             }
         }
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
 
         #endregion
 
@@ -78,11 +89,16 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         {
             this._currentLogin = login;
             this._idPatient = idPatient;
+            IsLoading = true;
             InitializeGraph();
-            IsLiveHeartbeat = true;
-            InstanceContext instanceContext = new InstanceContext(this);
-            ServiceLiveReference.ServiceLiveClient client = new ServiceLiveReference.ServiceLiveClient(instanceContext);
-            client.Subscribe();
+            Task.Run(() =>
+            {
+                IsLiveHeartbeat = true;
+                InstanceContext instanceContext = new InstanceContext(this);
+                ServiceLiveReference.ServiceLiveClient client = new ServiceLiveReference.ServiceLiveClient(instanceContext);
+                client.Subscribe();
+                IsLoading = false;
+            });
         }
 
         #endregion

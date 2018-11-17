@@ -6,12 +6,19 @@
         xmlns:local="clr-namespace:benais_jWPF_Medecin"
         xmlns:vm="clr-namespace:benais_jWPF_Medecin.ViewModel"
         mc:Ignorable="d"
-        Background="{StaticResource ColorDarkGrey}"
         Title="MainWindow" Height="450" Width="800">
+    <!--<Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard}"/>
+        </EventTrigger>
+    </Window.Triggers>-->
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"></BooleanToVisibilityConverter>        
+    </Window.Resources>
+
     <Window.DataContext>
         <vm:MainWindowViewModel></vm:MainWindowViewModel>
     </Window.DataContext>
-    
     <Grid>
         <ContentControl Content="{Binding CurrentUC}"></ContentControl>
     </Grid>

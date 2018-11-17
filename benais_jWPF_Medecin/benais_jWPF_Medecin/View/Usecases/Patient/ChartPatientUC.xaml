@@ -2,18 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:benais_jWPF_Medecin.View.Usecases.Patient"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <lvc:CartesianChart Grid.Row="1" Series="{Binding SeriesCollection}" LegendLocation="Right">
+        <ContentControl Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}" Style="{StaticResource LoadingContentControl}"></ContentControl>
+        <lvc:CartesianChart Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}" Grid.Row="1" Series="{Binding SeriesCollection, Mode=TwoWay}" LegendLocation="Right">
             <lvc:CartesianChart.AxisY>
                 <lvc:Axis Title="Value"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Date" Labels="{Binding Dates}"></lvc:Axis>
+                <lvc:Axis Title="Date" Labels="{Binding Dates, Mode=TwoWay}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
     </Grid>

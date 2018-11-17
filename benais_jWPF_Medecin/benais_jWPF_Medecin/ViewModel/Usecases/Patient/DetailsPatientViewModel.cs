@@ -1,4 +1,6 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {
@@ -11,6 +13,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private PatientBM _patientBM;
         private ServicePatientReference.Patient _selectedPatient;
         private int _observationsNb;
+        private bool _isLoading;
 
         #endregion
 
@@ -34,6 +37,15 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(ObservationsNb));
             }
         }
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
 
         #endregion
 
@@ -51,11 +63,22 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 
         #region Method
 
-        private void InitializePatient(int idPatient)
+        private async Task InitializePatient(int idPatient)
         {
-            SelectedPatient = _patientBM.GetPatient(idPatient);
-            if (SelectedPatient.Observations != null)
-                ObservationsNb = SelectedPatient.Observations.Length;
+            IsLoading = true;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    SelectedPatient = _patientBM.GetPatient(idPatient);
+                    if (SelectedPatient.Observations != null)
+                        ObservationsNb = SelectedPatient.Observations.Length;
+                });
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         #endregion

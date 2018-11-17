@@ -1,5 +1,6 @@
 ﻿using benais_jWPF_Medecin.DataAccess;
 using benais_jWPF_Medecin.ServicePatientReference;
+using System.Threading;
 
 namespace benais_jWPF_Medecin.BusinessManagement
 {
@@ -12,6 +13,7 @@ namespace benais_jWPF_Medecin.BusinessManagement
 
         public Patient GetPatient(int id)
         {
+            Thread.Sleep(4000);
             return new PatientDA().GetPatient(id);
         }
 

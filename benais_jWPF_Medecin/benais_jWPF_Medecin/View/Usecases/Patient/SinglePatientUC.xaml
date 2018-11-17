@@ -12,18 +12,18 @@
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
-        <TabControl Grid.Row="1">
-            <TabItem Header="Details">
-                <ContentControl Content="{Binding DetailsUC}"/>
+        <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
+            <TabItem Header="Details" >
+                <ContentControl Content="{Binding DetailsUC, Mode=TwoWay}"/>
             </TabItem>
             <TabItem Header="Observations">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Observations</TextBlock>
             </TabItem>
             <TabItem Header="Graph">
-                <ContentControl Content="{Binding ChartUC}"/>
+                <ContentControl Content="{Binding ChartUC, Mode=TwoWay}"/>
             </TabItem>
             <TabItem Header="Live data">
-                <ContentControl Content="{Binding LiveUC}"/>
+                <ContentControl Content="{Binding LiveUC, Mode=TwoWay}"/>
             </TabItem>
         </TabControl>
     </Grid>

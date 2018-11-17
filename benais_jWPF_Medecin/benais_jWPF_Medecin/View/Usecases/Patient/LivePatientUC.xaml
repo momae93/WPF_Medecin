@@ -11,55 +11,34 @@
     <UserControl.Resources>
         <converter:InvertBooleanConverter x:Key="invertBooleanConverter"/>
     </UserControl.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <ContentControl Grid.RowSpan="2" Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}" Style="{StaticResource LoadingContentControl}"></ContentControl>
+        <StackPanel Grid.Row="0" Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <CheckBox Content="Heartbeat" IsChecked="{Binding IsLiveHeartbeat}" />
             <CheckBox Content="Temperature" IsChecked="{Binding IsLiveHeartbeat, Converter={StaticResource invertBooleanConverter}}"/>
         </StackPanel>
-        <lvc:CartesianChart Grid.Row="1" Series="{Binding HeartbeatCollection}" LegendLocation="Right">
-            <lvc:CartesianChart.Style>
-                <Style TargetType="lvc:CartesianChart">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsLiveHeartbeat}" Value="True">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsLiveHeartbeat}" Value="False">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </lvc:CartesianChart.Style>
-            <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Value"></lvc:Axis>
-            </lvc:CartesianChart.AxisY>
-            <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Date" Labels="{Binding HeartbeatDates}"></lvc:Axis>
-            </lvc:CartesianChart.AxisX>
-        </lvc:CartesianChart>
-        <lvc:CartesianChart Grid.Row="1" Series="{Binding TemperatureCollection}" LegendLocation="Right" >
-            <lvc:CartesianChart.Style>
-                <Style TargetType="lvc:CartesianChart">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsLiveHeartbeat}" Value="True">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsLiveHeartbeat}" Value="False">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </lvc:CartesianChart.Style>
-            <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Value"></lvc:Axis>
-            </lvc:CartesianChart.AxisY>
-            <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Date" Labels="{Binding TemperatureDates}"></lvc:Axis>
-            </lvc:CartesianChart.AxisX>
-        </lvc:CartesianChart>
+        <Grid Grid.Row="1" Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}" >
+            <lvc:CartesianChart Visibility="{Binding IsLiveHeartbeat, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}" Series="{Binding HeartbeatCollection}" LegendLocation="Right">
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Value"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Date" Labels="{Binding HeartbeatDates}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+            <lvc:CartesianChart Visibility="{Binding IsLiveHeartbeat, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}" Series="{Binding TemperatureCollection}" LegendLocation="Right" >
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Value"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Date" Labels="{Binding TemperatureDates}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+        </Grid>
+
     </Grid>
 </UserControl>

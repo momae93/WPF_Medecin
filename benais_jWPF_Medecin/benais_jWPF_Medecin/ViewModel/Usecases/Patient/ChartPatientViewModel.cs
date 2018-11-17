@@ -1,10 +1,15 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.ServicePatientReference;
+using benais_jWPF_Medecin.ViewModel.Pattern;
 using LiveCharts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {
@@ -17,6 +22,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private PatientBM _patientBM;
         private SeriesCollection _seriesCollection; 
         private List<string> _dates;
+        private bool _isLoading;
 
         #endregion
 
@@ -40,6 +46,15 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(Dates));
             }
         }
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
 
         #endregion
 
@@ -50,33 +65,59 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             _currentLogin = login;
             _idPatient = idPatient;
             _patientBM = new PatientBM();
-            InitializeGraph(idPatient);
+            IsLoading = true;
+            InitializeGraph();
+            FetchChartData(idPatient);
         }
 
         #endregion
 
         #region Method
 
-        private void InitializeGraph(int idPatient)
+        private void InitializeGraph()
         {
-            ServicePatientReference.Patient _selectedPatient = _patientBM.GetPatient(idPatient);
-            List<Observation> observations = _selectedPatient.Observations.OrderBy(x => x.Date).ToList();
-            List<int> weightList = observations.Select(x => x.Weight).ToList();
-            List<int> pressureList = observations.Select(x => x.BloodPressure).ToList();
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
                     Title = "Weight",
-                    Values = weightList.AsChartValues<int>()
+                    Values = new ChartValues<int>()
                 },
                 new LineSeries
                 {
                     Title = "Blood pressure",
-                    Values = pressureList.AsChartValues<int>()
+                    Values = new ChartValues<int>()
                 }
             };
-            Dates = observations.Select(x => x.Date.ToString()).ToList();
+        }
+
+        private async Task FetchChartData(int idPatient)
+        {
+            IsLoading = true;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    ServicePatientReference.Patient _selectedPatient = _patientBM.GetPatient(idPatient);
+                    List<Observation> observations = _selectedPatient.Observations.OrderBy(x => x.Date).ToList();
+                    List<int> weightList = observations.Select(x => x.Weight).ToList();
+                    List<int> pressureList = observations.Select(x => x.BloodPressure).ToList();
+                    List<string> dateList = observations.Select(x => x.Date.ToString()).ToList();
+
+                    DispatchService.Invoke(() => UpdateGraph(weightList, pressureList, dateList));
+                });
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        private void UpdateGraph(List<int> weightList, List<int> pressureList, List<string> dateList)
+        {
+            SeriesCollection[0].Values = weightList.AsChartValues();
+            SeriesCollection[1].Values = pressureList.AsChartValues();
+            Dates = dateList;
         }
 
         #endregion
