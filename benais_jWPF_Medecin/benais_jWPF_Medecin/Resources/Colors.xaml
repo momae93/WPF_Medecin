@@ -1,6 +1,60 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:benais_jWPF_Medecin.Resources">
-    <SolidColorBrush x:Key="ColorDarkGrey"
-                     Color="#373737" />
+
+    <!--Link: https://flatuicolors.com/palette/defo-->
+
+    <!--Green-->
+    <SolidColorBrush x:Key="ColorGreenTurquoise"
+                     Color="#1abc9c" />
+    <SolidColorBrush x:Key="ColorGreenSee"
+                     Color="#16a085" />
+    <SolidColorBrush x:Key="ColorGreenEmerald"
+                     Color="#2ecc71" />
+    <SolidColorBrush x:Key="ColorGreenNephritis"
+                     Color="#27ae60" />
+    
+    <!--Purple-->
+    <SolidColorBrush x:Key="ColorPurpleAmethyst"
+                     Color="#9b59b6" />
+    <SolidColorBrush x:Key="ColorPurpleWisteria"
+                     Color="#8e44ad" />
+    
+    <!--Blue-->
+    <SolidColorBrush x:Key="ColorBluePeterRiver"
+                     Color="#3498db" />
+    <SolidColorBrush x:Key="ColorBelizeHole"
+                     Color="#2980b9" />
+    <SolidColorBrush x:Key="ColorDarkBlueAsphalt"
+                     Color="#34495e" />
+    <SolidColorBrush x:Key="ColorDarkBlueMidnight"
+                     Color="#2c3e50" />
+    
+    <!--Yellow-->
+    <SolidColorBrush x:Key="ColorYellowSunFlower"
+                     Color="#f1c40f" />
+    
+    <!--Orange-->
+    <SolidColorBrush x:Key="ColorOrange"
+                     Color="#f39c12" />
+    <SolidColorBrush x:Key="ColorOrangeCarrot"
+                     Color="#e67e22" />
+    <SolidColorBrush x:Key="ColorPumpkin"
+                     Color="#d35400" />
+    
+    <!--Red-->
+    <SolidColorBrush x:Key="ColorRedAlzarin"
+                     Color="#e74c3c" />
+    <SolidColorBrush x:Key="ColorRedPomegranate"
+                     Color="#c0392b" />
+    
+    <!--Grey-->
+    <SolidColorBrush x:Key="ColorGreyCloud"
+                     Color="#ecf0f1" />
+    <SolidColorBrush x:Key="ColorGreySilver"
+                     Color="#bdc3c7" />
+    <SolidColorBrush x:Key="ColorGreyConcetre"
+                     Color="#95a5a6" />
+    <SolidColorBrush x:Key="ColorGreyAsbestos"
+                     Color="#7f8c8d" />
 </ResourceDictionary>
