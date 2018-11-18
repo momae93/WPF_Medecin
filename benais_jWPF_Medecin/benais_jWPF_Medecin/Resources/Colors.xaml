@@ -5,56 +5,94 @@
     <!--Link: https://flatuicolors.com/palette/defo-->
 
     <!--Green-->
-    <SolidColorBrush x:Key="ColorGreenTurquoise"
-                     Color="#1abc9c" />
-    <SolidColorBrush x:Key="ColorGreenSee"
-                     Color="#16a085" />
-    <SolidColorBrush x:Key="ColorGreenEmerald"
-                     Color="#2ecc71" />
-    <SolidColorBrush x:Key="ColorGreenNephritis"
-                     Color="#27ae60" />
+    <Color x:Key="ColorGreenTurquoise">#1abc9c</Color>
+    <SolidColorBrush x:Key="ColorGreenTurquoiseBrush" 
+                     Color="{StaticResource ColorGreenTurquoise}" />
+
+    <Color x:Key="ColorGreenSee">#16a085</Color>
+    <SolidColorBrush x:Key="ColorGreenSeeBrush" 
+                     Color="{StaticResource ColorGreenSee}" />
+
+    <Color x:Key="ColorGreenEmerald">#2ecc71</Color>
+    <SolidColorBrush x:Key="ColorGreenEmeraldBrush" 
+                     Color="{StaticResource ColorGreenEmerald}" />
+
+    <Color x:Key="ColorGreenNephritis">#27ae60</Color>
+    <SolidColorBrush x:Key="ColorGreenNephritisBrush" 
+                     Color="{StaticResource ColorGreenNephritis}" />
     
     <!--Purple-->
-    <SolidColorBrush x:Key="ColorPurpleAmethyst"
-                     Color="#9b59b6" />
-    <SolidColorBrush x:Key="ColorPurpleWisteria"
-                     Color="#8e44ad" />
+    <Color x:Key="ColorPurpleAmethyst">#9b59b6</Color>
+    <SolidColorBrush x:Key="ColorPurpleAmethystBrush"
+                     Color="{StaticResource ColorPurpleAmethyst}" />
+
+    <Color x:Key="ColorPurpleWisteria">#8e44ad</Color>
+    <SolidColorBrush x:Key="ColorPurpleWisteriaBrush"
+                     Color="{StaticResource ColorPurpleWisteria}" />
     
     <!--Blue-->
-    <SolidColorBrush x:Key="ColorBluePeterRiver"
-                     Color="#3498db" />
-    <SolidColorBrush x:Key="ColorBelizeHole"
-                     Color="#2980b9" />
-    <SolidColorBrush x:Key="ColorDarkBlueAsphalt"
-                     Color="#34495e" />
-    <SolidColorBrush x:Key="ColorDarkBlueMidnight"
-                     Color="#2c3e50" />
+
+    <Color x:Key="ColorBluePeterRiver">#3498db</Color>
+    <SolidColorBrush x:Key="ColorBluePeterRiverBrush"
+                     Color="{StaticResource ColorBluePeterRiver}" />
+
+    <Color x:Key="ColorBelizeHole">#2980b9</Color>
+    <SolidColorBrush x:Key="ColorBelizeHoleBrush"
+                     Color="{StaticResource ColorBelizeHole}" />
+
+    <Color x:Key="ColorDarkBlueAsphalt">#34495e</Color>
+    <SolidColorBrush x:Key="ColorDarkBlueAsphaltBrush"
+                     Color="{StaticResource ColorDarkBlueAsphalt}" />
+
+    <Color x:Key="ColorDarkBlueMidnight">#2c3e50</Color>
+    <SolidColorBrush x:Key="ColorDarkBlueMidnightBrush"
+                     Color="{StaticResource ColorDarkBlueMidnight}" />
     
     <!--Yellow-->
-    <SolidColorBrush x:Key="ColorYellowSunFlower"
-                     Color="#f1c40f" />
+
+    <Color x:Key="ColorYellowSunFlower">#f1c40f</Color>
+    <SolidColorBrush x:Key="ColorYellowSunFlowerBrush"
+                     Color="{StaticResource ColorYellowSunFlower}" />
     
     <!--Orange-->
-    <SolidColorBrush x:Key="ColorOrange"
-                     Color="#f39c12" />
-    <SolidColorBrush x:Key="ColorOrangeCarrot"
-                     Color="#e67e22" />
-    <SolidColorBrush x:Key="ColorPumpkin"
-                     Color="#d35400" />
+
+    <Color x:Key="ColorOrange">#f39c12</Color>
+    <SolidColorBrush x:Key="ColorOrangeBrush"
+                     Color="{StaticResource ColorOrange}" />
+
+    <Color x:Key="ColorOrangeCarrot">#e67e22</Color>
+    <SolidColorBrush x:Key="ColorOrangeCarrotBrush"
+                     Color="{StaticResource ColorOrangeCarrot}" />
+
+    <Color x:Key="ColorPumpkin">#d35400</Color>
+    <SolidColorBrush x:Key="ColorPumpkinBrush"
+                     Color="{StaticResource ColorPumpkin}" />
     
     <!--Red-->
-    <SolidColorBrush x:Key="ColorRedAlzarin"
-                     Color="#e74c3c" />
-    <SolidColorBrush x:Key="ColorRedPomegranate"
-                     Color="#c0392b" />
+
+    <Color x:Key="ColorRedAlzarin">#e74c3c</Color>
+    <SolidColorBrush x:Key="ColorRedAlzarinBrush"
+                     Color="{StaticResource ColorRedAlzarin}" />
+
+    <Color x:Key="ColorRedPomegranate">#c0392b</Color>
+    <SolidColorBrush x:Key="ColorRedPomegranateBrush"
+                     Color="{StaticResource ColorRedPomegranate}" />
     
     <!--Grey-->
-    <SolidColorBrush x:Key="ColorGreyCloud"
-                     Color="#ecf0f1" />
-    <SolidColorBrush x:Key="ColorGreySilver"
-                     Color="#bdc3c7" />
-    <SolidColorBrush x:Key="ColorGreyConcetre"
-                     Color="#95a5a6" />
-    <SolidColorBrush x:Key="ColorGreyAsbestos"
-                     Color="#7f8c8d" />
+
+    <Color x:Key="ColorGreyCloud">#ecf0f1</Color>
+    <SolidColorBrush x:Key="ColorGreyCloudBrush"
+                     Color="{StaticResource ColorGreyCloud}" />
+
+    <Color x:Key="ColorGreySilver">#bdc3c7</Color>
+    <SolidColorBrush x:Key="ColorGreySilverBrush"
+                     Color="{StaticResource ColorGreySilver}" />
+
+    <Color x:Key="ColorGreyConcetre">#95a5a6</Color>
+    <SolidColorBrush x:Key="ColorGreyConcetreBrush"
+                     Color="{StaticResource ColorGreyConcetre}" />
+
+    <Color x:Key="ColorGreyAsbestos">#7f8c8d</Color>
+    <SolidColorBrush x:Key="ColorGreyAsbestosBrush"
+                     Color="{StaticResource ColorGreyAsbestos}" />
 </ResourceDictionary>

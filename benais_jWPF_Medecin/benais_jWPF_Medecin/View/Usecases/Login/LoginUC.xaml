@@ -6,16 +6,22 @@
              xmlns:local="clr-namespace:benais_jWPF_Medecin.View"
              xmlns:vm="clr-namespace:benais_jWPF_Medecin.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource ColorDarkBlueAsphaltBrush}">
     <UserControl.DataContext>
         <vm:LoginViewModel></vm:LoginViewModel>
     </UserControl.DataContext>
-    
+
     <Grid>
-        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox Width="200" Text="{Binding Login, Mode=TwoWay}"/>
-            <TextBox Width="200" Text="{Binding Password, Mode=TwoWay}"/>
-            <Button Width="200" Command="{Binding LoginCommand}">Connect</Button>
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Border CornerRadius="5" Padding="10" Background="White">
+                <StackPanel>
+                    <TextBlock Margin="20" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource ColorDarkBlueMidnightBrush}" FontSize="24">Welcome back !</TextBlock>
+                    <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" Tag="Username" Width="200" Height="40" Text="{Binding Login, Mode=TwoWay}" />
+                    <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" Tag="Password" Width="200" Height="40" Text="{Binding Password, Mode=TwoWay}"/>
+                    <Button  Margin="20 50 20 20" Width="200" Style="{StaticResource  ButtonLoginStyle}" Command="{Binding LoginCommand}" Background="{DynamicResource ColorDarkBlueAsphaltBrush}" 
+                             Foreground="White" FontFamily="Microsoft Sans Serif">Login</Button>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </UserControl>
