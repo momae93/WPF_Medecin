@@ -58,8 +58,6 @@ namespace benais_jWPF_Medecin.ViewModel
             else
             {
                 bool connect = _loginBM.Connect(Login, Password);
-                string message = (connect) ? "Success login" : "Fail login";
-                MessageBox.Show(message);
 
                 if (connect)
                     Mediator.Notify("Change_MainWindow_UC", EUserControl.MAIN, Login);
