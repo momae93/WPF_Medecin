@@ -1,5 +1,6 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.Model.Enum;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using System.Windows;
 using System.Windows.Input;
@@ -61,6 +62,11 @@ namespace benais_jWPF_Medecin.ViewModel
 
                 if (connect)
                     Mediator.Notify("Change_MainWindow_UC", EUserControl.MAIN, Login);
+                else
+                {
+                    RetryLoginWindow retryLoginWindow = new RetryLoginWindow();
+                    retryLoginWindow.Show();
+                }
             }
         }
         

@@ -97,6 +97,7 @@
     <Compile Include="ViewModel\Usecases\Patient\DetailsPatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\LivePatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\SinglePatientViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Popup\RetryLoginViewModel.cs" />
     <Compile Include="ViewModel\Usecases\User\AddUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -152,6 +153,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Usecases\PopupWindows\RetryLoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Usecases\User\AddUserUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +195,9 @@
     </Compile>
     <Compile Include="View\Usecases\Patient\SinglePatientUC.xaml.cs">
       <DependentUpon>SinglePatientUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usecases\PopupWindows\RetryLoginWindow.xaml.cs">
+      <DependentUpon>RetryLoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usecases\User\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>
@@ -328,8 +336,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\Images\" />
+    <Resource Include="Resources\Images\exclamation-mark.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

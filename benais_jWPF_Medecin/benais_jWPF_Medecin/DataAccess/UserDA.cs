@@ -14,8 +14,15 @@ namespace benais_jWPF_Medecin.DataAccess
 
         public bool Connect(string login, string password)
         {
-            bool connected = _service.Connect(login, password);
-            return connected;
+            try
+            {
+                bool connected = _service.Connect(login, password);
+                return connected;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool Disconnect(string login)
