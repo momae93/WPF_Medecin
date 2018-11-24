@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:benais_jWPF_Medecin.Resources">
+    <FontFamily x:Key="FontAwesome">pack://application:,,,/fonts/#FontAwesome</FontFamily>
+</ResourceDictionary>
