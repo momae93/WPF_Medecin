@@ -100,7 +100,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         }
         private void Back()
         {
-            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
+            PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
         }
 
         private void ChangeUC(int index)

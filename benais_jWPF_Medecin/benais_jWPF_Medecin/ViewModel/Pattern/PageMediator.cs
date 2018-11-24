@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.ViewModel.Pattern
 {
-    static public class Mediator
+    static public class PageMediator
     {
         static IDictionary<string, List<Action<EUserControl, object>>> callbacks = new Dictionary<string, List<Action<EUserControl, object>>>();
 

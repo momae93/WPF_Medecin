@@ -89,7 +89,7 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void ChangeView()
         {
-            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS_ADD, _currentLogin);
+            PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS_ADD, _currentLogin);
         }
 
         #endregion

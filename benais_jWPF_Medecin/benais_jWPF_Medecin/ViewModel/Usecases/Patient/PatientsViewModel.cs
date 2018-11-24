@@ -88,7 +88,7 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void ChangeView()
         {
-            Mediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_ADD, _currentLogin);
+            PageMediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_ADD, _currentLogin);
         }
 
         private ICommand _detailsCommand;
@@ -100,7 +100,7 @@ namespace benais_jWPF_Medecin.ViewModel
         private void ShowPatientDetails()
         {
             if (SelectedPatient != null)
-                Mediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_SINGLE, SelectedPatient.Id);
+                PageMediator.Notify("Change_Main_UC", Model.Enum.EUserControl.MAIN_PATIENTS_SINGLE, SelectedPatient.Id);
         }
 
         #endregion

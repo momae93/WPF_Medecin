@@ -81,7 +81,7 @@ namespace benais_jWPF_Medecin.ViewModel
             {
                 Patient patient = new Patient() { Name = Name, Firstname = Firstname, Birthday = Birthday, Observations = new List<Observation>().ToArray() };
                 if (_patientBM.AddPatient(patient))
-                    Mediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
+                    PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
                 else
                     MessageBox.Show("Fail add user");
             }
@@ -102,7 +102,7 @@ namespace benais_jWPF_Medecin.ViewModel
         }
         private void Back()
         {
-            Mediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
+            PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
         }
 
         #endregion

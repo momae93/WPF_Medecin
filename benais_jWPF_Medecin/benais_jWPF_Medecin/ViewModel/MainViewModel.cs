@@ -78,7 +78,7 @@ namespace benais_jWPF_Medecin.ViewModel
             InitializeUser();
             LoadUsersView();
 
-            Mediator.Register("Change_Main_UC", OnChangeView);
+            PageMediator.Register("Change_Main_UC", OnChangeView);
         }
 
         #endregion
@@ -93,7 +93,7 @@ namespace benais_jWPF_Medecin.ViewModel
             if (_sessionBM.Disconnect())
             {
                 MessageBox.Show("Success logout");
-                Mediator.Notify("Change_MainWindow_UC", EUserControl.LOGIN, _login);
+                PageMediator.Notify("Change_MainWindow_UC", EUserControl.LOGIN, _login);
             }
             else
             {

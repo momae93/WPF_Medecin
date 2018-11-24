@@ -34,7 +34,7 @@ namespace benais_jWPF_Medecin.ViewModel
         public MainWindowViewModel()
         {
             CurrentUC = new LoginUC();
-            Mediator.Register("Change_MainWindow_UC", OnConnectView);
+            PageMediator.Register("Change_MainWindow_UC", OnConnectView);
         }
 
         #endregion
