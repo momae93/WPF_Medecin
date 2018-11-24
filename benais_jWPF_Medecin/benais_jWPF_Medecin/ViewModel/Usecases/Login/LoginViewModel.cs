@@ -3,6 +3,7 @@ using benais_jWPF_Medecin.Common.Exceptions;
 using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -17,6 +18,7 @@ namespace benais_jWPF_Medecin.ViewModel
         private LoginBM _loginBM;
         private string _message;
         private bool _isLoadingSession;
+        private bool _isConnecting;
 
         #endregion
 
@@ -69,8 +71,10 @@ namespace benais_jWPF_Medecin.ViewModel
             LoginCommand = new RelayCommand(param => LoginSession(), param => true);
             Message = "";
             IsLoadingSession = false;
+            _isConnecting = false;
+            Mediator.Register("Retry_Login_UC", OnRetryListener);
         }
-        
+
         #endregion
 
         #region Command
@@ -96,36 +100,38 @@ namespace benais_jWPF_Medecin.ViewModel
         private async void Connect()
         {
             IsLoadingSession = true;
-            bool isError = false;
-
             await Task.Run(() =>
             {
                 try
                 {
                     bool connect = _loginBM.Connect(Login, Password);
                     if (connect)
-                        PageMediator.Notify("Change_MainWindow_UC", EUserControl.MAIN, Login);
+                        DispatchService.Invoke(() => PageMediator.Notify("Change_MainWindow_UC", EUserControl.MAIN, Login));
                     else
                         Message = "Wrong username or password";
                 }
                 catch (System.Exception e)
                 {
                     if (e is CustomServerException)
-                        isError = true;
+                        DispatchService.Invoke(() => ShowRetryWindow());
                 }
                 finally
                 {
                     IsLoadingSession = false;
                 }
             });
-
-            if (isError)
-                ShowRetryWindow();
         }
+
         private void ShowRetryWindow()
         {
             RetryLoginWindow retryLoginWindow = new RetryLoginWindow();
             retryLoginWindow.Show();
+        }
+
+        private void OnRetryListener(object obj)
+        {
+            if (!IsLoadingSession)
+                Connect();
         }
 
         #endregion

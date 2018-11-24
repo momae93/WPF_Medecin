@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:benais_jWPF_Medecin.View"
+             xmlns:properties="clr-namespace:benais_jWPF_Medecin.View.Properties"
              xmlns:vm="clr-namespace:benais_jWPF_Medecin.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="{DynamicResource ColorDarkBlueAsphaltBrush}">
@@ -18,8 +19,9 @@
                     <TextBlock Margin="20" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource ColorDarkBlueMidnightBrush}" FontSize="24">Welcome back !</TextBlock>
                     <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" Tag="Username" Width="200" Height="40" Text="{Binding Login, Mode=TwoWay}" />
                     <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" Tag="Password" Width="200" Height="40" Text="{Binding Password, Mode=TwoWay}"/>
-                    <Button  Margin="20 50 20 20" Width="200" Style="{StaticResource  ButtonLoginStyle}" Command="{Binding LoginCommand}" Background="{DynamicResource ColorDarkBlueAsphaltBrush}" 
-                             Foreground="White" FontFamily="Microsoft Sans Serif">Login</Button>
+                    <TextBlock Margin="20 10 20 0" Text="{Binding Message}" FontSize="10" Foreground="{StaticResource ColorRedAlzarinBrush}"/>
+                    <Button  Margin="20 50 20 20" Width="200" properties:IsLoadingProperty.Value="{Binding IsLoadingSession}" Style="{StaticResource  ButtonLoginStyle}" Command="{Binding LoginCommand}" Background="{DynamicResource ColorDarkBlueAsphaltBrush}" 
+                             Foreground="White" Content="Login"/>
                 </StackPanel>
             </Border>
         </StackPanel>

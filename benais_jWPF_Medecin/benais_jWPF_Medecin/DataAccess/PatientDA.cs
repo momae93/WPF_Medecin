@@ -1,5 +1,4 @@
 ﻿using benais_jWPF_Medecin.ServicePatientReference;
-using System.Threading;
 
 namespace benais_jWPF_Medecin.DataAccess
 {

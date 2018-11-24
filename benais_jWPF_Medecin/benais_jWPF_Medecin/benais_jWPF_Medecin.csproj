@@ -68,6 +68,7 @@
     <Compile Include="BusinessManagement\LoginBM.cs" />
     <Compile Include="BusinessManagement\PatientBM.cs" />
     <Compile Include="BusinessManagement\UserBM.cs" />
+    <Compile Include="Common\Exceptions\CustomServerException.cs" />
     <Compile Include="Connected Services\ServiceLiveReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,6 +91,7 @@
     <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\Pattern\DispatchService.cs" />
+    <Compile Include="ViewModel\Pattern\Mediator.cs" />
     <Compile Include="ViewModel\Usecases\Patient\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Login\LoginViewModel.cs" />
@@ -102,7 +104,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\PatientsViewModel.cs" />
-    <Compile Include="ViewModel\Pattern\Mediator.cs" />
+    <Compile Include="ViewModel\Pattern\PageMediator.cs" />
     <Compile Include="ViewModel\Usecases\User\UsersViewModel.cs" />
     <Compile Include="ViewModel\Utils\StringExtension.cs" />
     <Compile Include="View\BaseUC.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="View\Converters\ByteToImageConverter.cs" />
     <Compile Include="View\Converters\ImageToByteArray.cs" />
     <Compile Include="View\Converters\InversionBooleanConverter.cs" />
+    <Compile Include="View\Properties\IsLoadingProperty.cs" />
     <Compile Include="View\Usecases\Login\LoginUC.xaml.cs">
       <DependentUpon>LoginUC.xaml</DependentUpon>
     </Compile>
@@ -125,11 +128,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Loaders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\TextBoxs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Texts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -274,6 +285,11 @@
     <None Include="Connected Services\ServiceUserReference\ServiceUser2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -336,9 +352,14 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\exclamation-mark.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

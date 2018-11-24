@@ -1,4 +1,5 @@
-﻿using benais_jWPF_Medecin.DataAccess;
+﻿using benais_jWPF_Medecin.Common.Exceptions;
+using benais_jWPF_Medecin.DataAccess;
 
 namespace benais_jWPF_Medecin.BusinessManagement
 {
@@ -15,7 +16,17 @@ namespace benais_jWPF_Medecin.BusinessManagement
         /// <returns></returns>
         public bool Connect(string login, string password)
         {
-            return new UserDA().Connect(login, password);
+            try
+            {
+                return new UserDA().Connect(login, password);
+            }
+            catch (System.Exception e)
+            {
+                if (e is System.ServiceModel.EndpointNotFoundException)
+                    throw new CustomServerException();
+                else
+                    return false;
+            }
         }
     }
 }

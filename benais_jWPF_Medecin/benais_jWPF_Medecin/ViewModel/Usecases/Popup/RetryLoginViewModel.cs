@@ -1,4 +1,4 @@
-﻿using benais_jWPF_Medecin.View.Usecases.PopupWindows;
+﻿using benais_jWPF_Medecin.ViewModel.Pattern;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
@@ -33,8 +33,8 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Popup
 
         public RetryLoginViewModel()
         {
-            CancelCommand = new RelayCommand((param) => CloseWindows());
-            RetryCommand = new RelayCommand((param) => CloseWindows());
+            CancelCommand = new RelayCommand((param) => Cancel());
+            RetryCommand = new RelayCommand((param) => Retry());
             StartAyncTimer();
         }
 
@@ -49,6 +49,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Popup
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.DoWork += _backgroundWorker_DoWork;
             _backgroundWorker.ProgressChanged += _backgroundWorker_ProgressChanged;
+            _backgroundWorker.WorkerSupportsCancellation = true;
             _backgroundWorker.RunWorkerAsync();
         }
 
@@ -65,9 +66,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Popup
         private void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             var worker = sender as BackgroundWorker;
-            for (int i = 0; i < 11; i++)
+            for (int i = 6; i > 0; i--)
             {
-                worker.ReportProgress(i);
+                worker.ReportProgress(i - 1);
                 Thread.Sleep(1000);
             }
         }
@@ -79,7 +80,11 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Popup
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            CloseWindows();
+            if (!_backgroundWorker.CancellationPending)
+            {
+                Mediator.Notify("Retry_Login_UC", null);
+                CloseWindows();
+            }
         }
 
         #endregion
@@ -94,6 +99,12 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Popup
             set { _cancelCommand = value; }
         }
 
+        private void Cancel()
+        {
+            _backgroundWorker.CancelAsync();
+            CloseWindows();
+        }
+
         private ICommand _retryCommand;
 
         public ICommand RetryCommand
@@ -101,6 +112,14 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Popup
             get { return _retryCommand; }
             set { _retryCommand = value; }
         }
+
+        private void Retry()
+        {
+            _backgroundWorker.CancelAsync();
+            Mediator.Notify("Retry_Login_UC", null);
+            CloseWindows();
+        }
+
         #endregion
     }
 }
