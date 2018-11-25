@@ -16,11 +16,11 @@
         <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Border CornerRadius="5" Padding="10" Background="White">
                 <StackPanel>
-                    <TextBlock Margin="20" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource ColorDarkBlueMidnightBrush}" FontSize="24">Welcome back !</TextBlock>
-                    <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" Tag="Username" Width="200" Height="40" Text="{Binding Login, Mode=TwoWay}" />
-                    <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" Tag="Password" Width="200" Height="40" Text="{Binding Password, Mode=TwoWay}"/>
-                    <TextBlock Margin="20 10 20 0" Text="{Binding Message}" FontSize="10" Foreground="{StaticResource ColorRedAlzarinBrush}"/>
-                    <Button  Margin="20 50 20 20" Width="200" properties:IsLoadingProperty.Value="{Binding IsLoadingSession}" Style="{StaticResource  ButtonLoginStyle}" Command="{Binding LoginCommand}" Background="{DynamicResource ColorDarkBlueAsphaltBrush}" 
+                    <TextBlock Margin="20" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource ColorDarkBlueMidnightBrush}" FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeXLarge}">Welcome back !</TextBlock>
+                    <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoThin}" Tag="Username" Width="200" Height="40" Text="{Binding Login, Mode=TwoWay}" />
+                    <TextBox Margin="20 10 20 0" Style="{StaticResource TextBoxPlaceholder}" FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoThin}" Tag="Password" Width="200" Height="40" Text="{Binding Password, Mode=TwoWay}"/>
+                    <TextBlock Margin="20 10 20 0" Text="{Binding Message}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeSmaller}" Foreground="{StaticResource ColorRedAlzarinBrush}"/>
+                    <Button  Margin="20 50 20 20" Width="200" FontFamily="{StaticResource LatoThin}" FontSize="{StaticResource FontSizeSmall}" properties:IsLoadingProperty.Value="{Binding IsLoadingSession}" Style="{StaticResource  ButtonLoginStyle}" Command="{Binding LoginCommand}" Background="{DynamicResource ColorDarkBlueAsphaltBrush}" 
                              Foreground="White" Content="Login"/>
                 </StackPanel>
             </Border>
