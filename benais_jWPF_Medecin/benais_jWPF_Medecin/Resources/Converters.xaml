@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converter="clr-namespace:benais_jWPF_Medecin.View.Converters"
                     xmlns:local="clr-namespace:benais_jWPF_Medecin.Resources">
+    <converter:BooleanToColorConverter x:Key="booleanToColorConverter" />
     <converter:BooleanToVisibilityConverter x:Key="customBooleanToVisibilityConverter"></converter:BooleanToVisibilityConverter>
     <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
 </ResourceDictionary>

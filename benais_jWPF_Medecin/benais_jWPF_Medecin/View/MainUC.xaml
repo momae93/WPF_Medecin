@@ -30,15 +30,15 @@
             </Ellipse>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Margin="20 0 0 0" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding CurrentUser.Firstname}" Foreground="{StaticResource ColorGreyCloudBrush}"  VerticalAlignment="Center" FontSize="18"/>
-                    <TextBlock Text="{Binding CurrentUser.Name}" Margin="5 0 0 0"  Foreground="{StaticResource ColorGreyCloudBrush}" VerticalAlignment="Center" FontSize="18"/>
+                    <TextBlock Text="{Binding CurrentUser.Firstname}" Foreground="{StaticResource ColorGreyCloudBrush}"  VerticalAlignment="Center" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeLarge}"/>
+                    <TextBlock Text="{Binding CurrentUser.Name}" Margin="5 0 0 0"  Foreground="{StaticResource ColorGreyCloudBrush}" VerticalAlignment="Center" FontFamily="{StaticResource LatoThin}" FontSize="{StaticResource FontSizeLarge}"/>
                 </StackPanel>
-                <TextBlock Text="{Binding CurrentUser.Role}" Margin="0 5 0 0"  Foreground="{StaticResource ColorGreyCloudBrush}" VerticalAlignment="Center" FontSize="12"/>
+                <TextBlock Text="{Binding CurrentUser.Role}" Margin="0 5 0 0"  Foreground="{StaticResource ColorGreyCloudBrush}" VerticalAlignment="Center" FontFamily="{StaticResource LatoThin}" FontSize="{StaticResource FontSizeSmall}"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="30" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Button Width="200" Style="{StaticResource ButtonUsersStyle}"  Margin="0 10 0 0" Command="{Binding PatientsViewCommand}" FontSize="16"/>
-            <Button Width="200" Style="{StaticResource ButtonUsersStyle}"  Margin="0 10 0 0" Command="{Binding UsersViewCommand}" FontSize="16"/>
+            <Button Width="200" Style="{StaticResource ButtonUsersStyle}"  Margin="0 10 0 0" Command="{Binding PatientsViewCommand}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeLarge}"/>
+            <Button Width="200" Style="{StaticResource ButtonUsersStyle}"  Margin="0 10 0 0" Command="{Binding UsersViewCommand}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeLarge}"/>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2">
             <Button Width="200" Margin="20" Command="{Binding LogoutCommand}">Logout</Button>
