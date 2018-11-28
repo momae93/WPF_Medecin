@@ -4,87 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:benais_jWPF_Medecin.View"
-             xmlns:converter="clr-namespace:benais_jWPF_Medecin.View.Converters"
-             Background="White"
              HorizontalAlignment="Stretch"
+             HorizontalContentAlignment="Stretch"
              VerticalAlignment="Stretch"
              VerticalContentAlignment="Stretch"
+             d:DesignHeight="450" d:DesignWidth="800"
              mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
-        <Grid>
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Users" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeXXLarge}"/>
-            <Button Grid.Row="0"  Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding AddUserCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0">+ Add user</Button>
+        <Grid Grid.Row="0">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Users" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeXXLarge}"/>
+            <Button Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding AddUserCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0">+ Add user</Button>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <DataGrid Margin="30" HeadersVisibility="Column" CanUserResizeColumns="False"  CanUserResizeRows="False" GridLinesVisibility="None" BorderThickness="0" Background="White" Grid.Row="1" ItemsSource="{Binding UserList}" SelectedItem="{Binding Path=SelectedUser}" AutoGenerateColumns="False">
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                        <Setter Property="Foreground" Value="{StaticResource ColorGreyConcetreBrush}"></Setter>
-                        <Setter Property="BorderBrush" Value="{StaticResource ColorGreyConcetreBrush}"></Setter>
-                        <Setter Property="Background" Value="White"></Setter>
-                        <Setter Property="Margin" Value="0 0 40 0"></Setter>
-                        <Setter Property="ContentTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <Grid>
-                                        <TextBlock FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}" Margin="0 5 0 5" HorizontalAlignment="Center" Text="{Binding}">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Style.Triggers>
-                                                        <Trigger Property ="IsMouseOver" Value="True">
-                                                            <Setter Property= "Foreground" Value="{StaticResource ColorOrangeBrush}"/>
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
-                                    </Grid>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="Height" Value="auto"></Setter>
-                        <Setter Property="Width" Value="auto"></Setter>
-                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                        <Setter Property="BorderThickness" Value="0"></Setter>
-                        <Setter Property="Margin" Value="0 5 0 5"></Setter>
-                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                        <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}"></Setter>
-                        <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"></Setter>
-                    </Style>
-                </DataGrid.CellStyle>
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name"  Binding="{Binding Name}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
-                    <DataGridTextColumn Header="Firstname"  Binding="{Binding Firstname}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
-                    <DataGridTextColumn Header="Role" Binding="{Binding Role}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
-                    <DataGridTemplateColumn Header="Connected">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Connected}" Foreground="{Binding Connected, Converter={StaticResource booleanToColorConverter}}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Foreground="White" Width="80" Background="{StaticResource ColorRedPomegranateBrush}" Style="{StaticResource ButtonDeleteStyle}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DeleteUserCommand}" Content="Delete"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-
+        <DataGrid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  CanUserResizeColumns="False" CanUserResizeRows="False"
+                  HeadersVisibility="Column"  GridLinesVisibility="None" AutoGenerateColumns="False"
+                  Background="White" Margin="30" BorderThickness="0"
+                  ColumnHeaderStyle="{StaticResource basicDataGridColumnHeader}"
+                  CellStyle="{StaticResource basicDataGridCell}"
+                  ItemsSource="{Binding UserList}" SelectedItem="{Binding Path=SelectedUser}">
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTextColumn Header="Firstname" Width="*" Binding="{Binding Firstname}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTextColumn Header="Role" Width="*" Binding="{Binding Role}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTemplateColumn Header="Connected" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Connected}" Foreground="{Binding Connected, Converter={StaticResource booleanToColorConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Foreground="White" Width="80" Style="{StaticResource ButtonDeleteStyle}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DeleteUserCommand}" Content="Delete"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>
