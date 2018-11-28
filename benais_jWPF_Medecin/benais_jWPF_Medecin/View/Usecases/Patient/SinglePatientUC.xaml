@@ -6,23 +6,49 @@
              xmlns:local="clr-namespace:benais_jWPF_Medecin.View.Usecases.Patient"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
-        <TabControl Grid.Row="1" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
-            <TabItem Header="Details" >
+        <Button Grid.Row="0" Grid.ColumnSpan="2"  Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
+
+        <TabControl Margin="20" Grid.Row="1" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" BorderBrush="Transparent" BorderThickness="0">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <StackPanel Name="Panel" Margin="15" Orientation="Vertical" VerticalAlignment="Center">
+                                    <TextBlock x:Name="TabItemName" FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoRegular}" Text="{TemplateBinding Header}"/>
+                                    <Separator x:Name="TabItemSepator" Background="AliceBlue"/>
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="TabItemName" Property="Foreground" Value="{StaticResource ColorBluePeterRiverBrush}" />
+                                        <Setter TargetName="TabItemSepator" Property="Background" Value="{StaticResource ColorBluePeterRiverBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="TabItemName" Property="Foreground" Value="Black" />
+                                        <Setter TargetName="TabItemSepator" Property="Background" Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="DETAILS" >
                 <ContentControl Content="{Binding DetailsUC, Mode=TwoWay}"/>
             </TabItem>
-            <TabItem Header="Observations">
+            <TabItem Header="OBSERVATIONS">
                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Observations</TextBlock>
             </TabItem>
-            <TabItem Header="Graph">
+            <TabItem Header="GRAPH">
                 <ContentControl Content="{Binding ChartUC, Mode=TwoWay}"/>
             </TabItem>
-            <TabItem Header="Live data">
+            <TabItem Header="LIVE DATA">
                 <ContentControl Content="{Binding LiveUC, Mode=TwoWay}"/>
             </TabItem>
         </TabControl>
