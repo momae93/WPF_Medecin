@@ -21,13 +21,13 @@
         </Grid>
 
         <DataGrid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                  CanUserResizeColumns="False" CanUserResizeRows="False"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
                   HeadersVisibility="Column"  GridLinesVisibility="None" AutoGenerateColumns="False"
                   Background="White" Margin="30" BorderThickness="0"
                   ColumnHeaderStyle="{StaticResource basicDataGridColumnHeader}"
                   CellStyle="{StaticResource basicDataGridCell}"
                   ItemsSource="{Binding UserList}" SelectedItem="{Binding Path=SelectedUser}">
-            
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
                 <DataGridTextColumn Header="Firstname" Width="*" Binding="{Binding Firstname}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
