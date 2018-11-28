@@ -89,7 +89,6 @@ namespace benais_jWPF_Medecin.ViewModel
             AddUserCommand = new RelayCommand(param => AddUser(), param => true);
             LoadImageCommand = new RelayCommand(param => LoadImage(), param => true);
             BackCommand = new RelayCommand(param => Back(), param => true);
-            Firstname = "test";
         }
 
         private void InitDefaultPicture()

@@ -52,7 +52,7 @@
             
             <StackPanel Grid.Row="2" Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch" Background="White" Height="auto">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="10" Text="PART 3: " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                    <TextBlock Margin="20" Text="PART 3: " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
                     <TextBlock Margin="0 10 10 10" Text="Picture" FontFamily="{StaticResource LatoRegular}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" VerticalAlignment="Center"/>
                 </StackPanel>
                 <Image Source="{Binding Image, Converter={StaticResource imgConverter}}" Width="200" Height="200" Margin="40"/>
