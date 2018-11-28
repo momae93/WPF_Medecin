@@ -36,14 +36,14 @@
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DetailsPatientCommand}">Details</Button>
+                            <Button Foreground="White" Width="90" Style="{StaticResource ButtonDetailsStyle}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DetailsPatientCommand}" Content="Details"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Foreground="White" Width="80" Style="{StaticResource ButtonDeleteStyle}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DeletePatientCommand}" Content="Delete"/>
+                            <Button Foreground="White" Width="90" Margin="20 0 0 0" Style="{StaticResource ButtonDeleteStyle}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DeletePatientCommand}" Content="Delete"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
