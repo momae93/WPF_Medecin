@@ -14,21 +14,54 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBox Width="200" Text="{Binding Name, Mode=TwoWay}"/>
-            <TextBox Width="200" Text="{Binding Firstname, Mode=TwoWay}"/>
-            <TextBox Width="200" Text="{Binding Password, Mode=TwoWay}"/>
-            <TextBox Width="200" Text="{Binding Login, Mode=TwoWay}"/>
-            <TextBox Width="200" Text="{Binding Role, Mode=TwoWay}"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Command="{Binding  AddUserCommand}">Add</Button>
-                <Button Width="100" Command="{Binding  LoadImageCommand}">Load Image</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="0" Grid.ColumnSpan="2"  Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
+        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Background="{StaticResource ColorGreyCloudBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch" Background="White" Height="auto">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="20" Text="PART 1: " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                    <TextBlock Margin="0 10 10 10" Text="Basic informations" FontFamily="{StaticResource LatoRegular}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <ContentControl Margin="20 5 20 5" Tag="Firstname" Content="{Binding Firstname, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                <ContentControl Margin="20 5 20 5" Tag="Name" Content="{Binding Name, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
             </StackPanel>
-            <Image Source="{Binding Image, Converter={StaticResource imgConverter}}" Width="200" Height="200" Margin="40" />
-        </StackPanel>
+            
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch" Background="White" Height="auto">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="20" Text="PART 2: " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                    <TextBlock Margin="0 10 10 10" Text="Work informations" FontFamily="{StaticResource LatoRegular}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <ContentControl Margin="20 5 20 5" Tag="Login" Content="{Binding Login, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                <ContentControl Margin="20 5 20 5" Tag="Role" Content="{Binding Role, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                <ContentControl Margin="20 5 20 5" Tag="Password" Content="{Binding Password, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="2" Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch" Background="White" Height="auto">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="10" Text="PART 3: " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                    <TextBlock Margin="0 10 10 10" Text="Picture" FontFamily="{StaticResource LatoRegular}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <Image Source="{Binding Image, Converter={StaticResource imgConverter}}" Width="200" Height="200" Margin="40"/>
+                <Button Margin="20" Width="100" Command="{Binding  LoadImageCommand}" Style="{StaticResource ButtonConfirmStyle}"  VerticalAlignment="Center" Content="Add"></Button>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                <Button Width="150" Style="{StaticResource ButtonConfirmStyle}" Command="{Binding AddUserCommand}" Content="Confirm"></Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

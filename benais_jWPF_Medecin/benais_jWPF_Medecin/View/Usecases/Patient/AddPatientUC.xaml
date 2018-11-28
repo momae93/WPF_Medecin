@@ -14,7 +14,12 @@
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
         <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBox Width="200" Text="{Binding Name, Mode=TwoWay}"/>
+            <Grid>
+                <Border CornerRadius="10">
+                    <TextBox Width="200" Text="{Binding Name, Mode=TwoWay}"/>
+                    
+                </Border>
+            </Grid>
             <TextBox Width="200" Text="{Binding Firstname, Mode=TwoWay}"/>
             <DatePicker Height="25" SelectedDate="{Binding Path=Birthday, Mode=TwoWay, TargetNullValue={x:Static sys:DateTime.Now}}" VerticalAlignment="Top" Width="115" />
             <Button Width="100" Command="{Binding  AddPatientCommand}">Add</Button>

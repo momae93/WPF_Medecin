@@ -5,6 +5,7 @@ using benais_jWPF_Medecin.View.Converters;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using benais_jWPF_Medecin.ViewModel.Utils;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -24,7 +25,6 @@ namespace benais_jWPF_Medecin.ViewModel
         private string _login;
         private string _role;
         private byte[] _image;
-
 
         #endregion
 
@@ -85,10 +85,26 @@ namespace benais_jWPF_Medecin.ViewModel
         {
             _currentLogin = login;
             _sessionBM = new UserBM(login);
-
+            InitDefaultPicture();
             AddUserCommand = new RelayCommand(param => AddUser(), param => true);
             LoadImageCommand = new RelayCommand(param => LoadImage(), param => true);
             BackCommand = new RelayCommand(param => Back(), param => true);
+            Firstname = "test";
+        }
+
+        private void InitDefaultPicture()
+        {
+            try
+            {
+                string filename = "default-picture.png";
+                string resourceFolderPath = Path.GetFullPath(
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources\Images\")) + filename;
+                Uri uri = new Uri(resourceFolderPath);
+                BitmapImage bitmapImage = new BitmapImage(uri);
+                Image = ImageToByteArray.Convert(bitmapImage);
+            }
+            catch (Exception)
+            { }
         }
 
         #endregion
