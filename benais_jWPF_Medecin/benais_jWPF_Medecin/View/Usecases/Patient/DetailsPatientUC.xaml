@@ -9,10 +9,22 @@
     <Grid>
         <ContentControl Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}" Style="{StaticResource LoadingContentControl}"/>
         <StackPanel Visibility="{Binding IsLoading, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}" Orientation="Vertical" VerticalAlignment="Center">
-            <TextBlock Width="200" Text="{Binding SelectedPatient.Name, Mode=TwoWay}"/>
-            <TextBlock Width="200" Text="{Binding SelectedPatient.Firstname, Mode=TwoWay}"/>
-            <TextBlock Width="200" Text="{Binding SelectedPatient.Birthday, Mode=TwoWay}"/>
-            <TextBlock Width="200" Text="{Binding ObservationsNb, Mode=TwoWay}"/>
+            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource LatoBold}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="Name : "/>
+                <TextBlock FontFamily="{StaticResource LatoRegular}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="{Binding SelectedPatient.Name, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource LatoBold}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="Firstname : "/>
+                <TextBlock FontFamily="{StaticResource LatoRegular}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="{Binding SelectedPatient.Firstname, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource LatoBold}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="Birthdate : "/>
+                <TextBlock FontFamily="{StaticResource LatoRegular}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="{Binding SelectedPatient.Birthday, Mode=TwoWay}"/>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock FontFamily="{StaticResource LatoBold}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="Observations number : "/>
+                <TextBlock FontFamily="{StaticResource LatoRegular}" VerticalAlignment="Center" FontSize="{StaticResource FontSizeRegular}" Text="{Binding ObservationsNb, Mode=TwoWay}"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
