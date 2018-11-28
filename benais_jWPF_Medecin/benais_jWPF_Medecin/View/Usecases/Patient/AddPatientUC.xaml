@@ -9,20 +9,27 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="0.8*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <Grid>
-                <Border CornerRadius="10">
-                    <TextBox Width="200" Text="{Binding Name, Mode=TwoWay}"/>
-                    
-                </Border>
-            </Grid>
-            <TextBox Width="200" Text="{Binding Firstname, Mode=TwoWay}"/>
-            <DatePicker Height="25" SelectedDate="{Binding Path=Birthday, Mode=TwoWay, TargetNullValue={x:Static sys:DateTime.Now}}" VerticalAlignment="Top" Width="115" />
-            <Button Width="100" Command="{Binding  AddPatientCommand}">Add</Button>
-        </StackPanel>
+        <Button Grid.Row="0" Grid.ColumnSpan="2"  Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch" Background="White" Height="auto">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="20" Text="INFORMATIONS " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <ContentControl Margin="20 5 20 5" Tag="Firstname" Content="{Binding Firstname, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                <ContentControl Margin="20 5 20 5" Tag="Name" Content="{Binding Name, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                <DatePicker Margin="20 5 20 5" Height="25" SelectedDate="{Binding Path=Birthday, Mode=TwoWay, TargetNullValue={x:Static sys:DateTime.Now}}" VerticalAlignment="Top" Width="115" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                <Button Width="150" Style="{StaticResource ButtonConfirmStyle}" Command="{Binding AddPatientCommand}" Content="Confirm"></Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
