@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Resources/Buttons.xaml"/>
                 <ResourceDictionary Source="Resources/Loaders.xaml"/>
                 <ResourceDictionary Source="Resources/TextBoxs.xaml"/>
+                <ResourceDictionary Source="Resources/Datagrids.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
