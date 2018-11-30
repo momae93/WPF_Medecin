@@ -4,5 +4,6 @@
                     xmlns:local="clr-namespace:benais_jWPF_Medecin.Resources">
     <converter:BooleanToColorConverter x:Key="booleanToColorConverter" />
     <converter:BooleanToVisibilityConverter x:Key="customBooleanToVisibilityConverter"></converter:BooleanToVisibilityConverter>
+    <converter:BooleanToVisibilityCollapsedConverter x:Key="booleanToVisibilityCollapsedConverter"></converter:BooleanToVisibilityCollapsedConverter>
     <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
 </ResourceDictionary>

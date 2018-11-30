@@ -21,9 +21,10 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private int _bloodPressure;
         private string _comment;
         private ObservableCollection<Prescription> _prescriptionCollection;
-        private ObservableCollection<Picture> _picturesCollection;
         private string _prescription;
-        private int _selectedPrescriptionIndex;
+        private bool _isPrescriptionsEmpty;
+        private ObservableCollection<Picture> _picturesCollection;
+        private bool _isPicturesEmpty;
 
         #endregion
 
@@ -67,15 +68,6 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(PrescriptionCollection));
             }
         }
-        public ObservableCollection<Picture> PicturesCollection
-        {
-            get { return _picturesCollection; }
-            set
-            {
-                _picturesCollection = value;
-                OnPropertyChanged(nameof(PicturesCollection));
-            }
-        }
         public string Prescription
         {
             get { return _prescription; }
@@ -85,13 +77,31 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(Prescription));
             }
         }
-        public int SelectedPrescriptionIndex
+        public bool IsPrescriptionEmpty
         {
-            get { return _selectedPrescriptionIndex; }
+            get { return _isPrescriptionsEmpty; }
             set
             {
-                _selectedPrescriptionIndex = value;
-                OnPropertyChanged(nameof(SelectedPrescriptionIndex));
+                _isPrescriptionsEmpty = value;
+                OnPropertyChanged(nameof(IsPrescriptionEmpty));
+            }
+        }
+        public ObservableCollection<Picture> PicturesCollection
+        {
+            get { return _picturesCollection; }
+            set
+            {
+                _picturesCollection = value;
+                OnPropertyChanged(nameof(PicturesCollection));
+            }
+        }
+        public bool IsPicturesEmpty
+        {
+            get { return _isPicturesEmpty; }
+            set
+            {
+                _isPicturesEmpty = value;
+                OnPropertyChanged(nameof(IsPicturesEmpty));
             }
         }
 
@@ -103,11 +113,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         {
             PrescriptionCollection = new ObservableCollection<Prescription>();
             PicturesCollection = new ObservableCollection<Picture>();
-            AddObservationCommand = new RelayCommand(param => AddObservation(), param => true);
-            AddPrescriptionCommand = new RelayCommand(param => AddPrescription(), param => true);
-            DeletePrescriptionCommand = new RelayCommand(param => DeletePrescription(param), param => true);
-            AddPictureCommand = new RelayCommand(param => AddPicture(), param => true);
-            DeletePictureCommand = new RelayCommand(param => DeletePicture(param), param => true);
+            IsPicturesEmpty = true;
+            IsPrescriptionEmpty = true;
+            InitializeCommands();
         }
 
         #endregion
@@ -157,7 +165,10 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private void AddPrescription()
         {
             if (!string.IsNullOrWhiteSpace(Prescription))
+            {
                 PrescriptionCollection.Add(new Prescription(Prescription));
+                IsPrescriptionEmpty = false;
+            }
             Prescription = "";
         }
 
@@ -176,6 +187,8 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             try
             {
                 PrescriptionCollection.RemoveAll(x => x.Id == Convert.ToString(id));
+                if (PrescriptionCollection.Count == 0)
+                    IsPrescriptionEmpty = true;
             }
             catch (Exception)
             { }
@@ -206,6 +219,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 BitmapImage bitmapImage = new BitmapImage(new Uri(dialog.FileName));
                 byte[] picture = ImageToByteArray.Convert(bitmapImage);
                 PicturesCollection.Add(new Picture(picture));
+                IsPicturesEmpty = false;
             }
         }
 
@@ -225,6 +239,8 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             try
             {
                 PicturesCollection.RemoveAll(x => x.Id == Convert.ToString(id));
+                if (PicturesCollection.Count == 0)
+                    IsPicturesEmpty = true;
             }
             catch (Exception)
             { }
@@ -233,6 +249,15 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         #endregion
 
         #region Methods
+
+        private void InitializeCommands()
+        {
+            AddObservationCommand = new RelayCommand(param => AddObservation(), param => true);
+            AddPrescriptionCommand = new RelayCommand(param => AddPrescription(), param => true);
+            DeletePrescriptionCommand = new RelayCommand(param => DeletePrescription(param), param => true);
+            AddPictureCommand = new RelayCommand(param => AddPicture(), param => true);
+            DeletePictureCommand = new RelayCommand(param => DeletePicture(param), param => true);
+        }
 
         #endregion
     }

@@ -121,6 +121,7 @@
     <Compile Include="ViewModel\Utils\StringExtension.cs" />
     <Compile Include="View\BaseUC.cs" />
     <Compile Include="View\Converters\BooleanToColorConverter.cs" />
+    <Compile Include="View\Converters\BooleanToVisibilityCollapsedConverter.cs" />
     <Compile Include="View\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="View\Converters\ByteToImageConverter.cs" />
     <Compile Include="View\Converters\ImageToByteArray.cs" />

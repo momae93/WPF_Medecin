@@ -32,7 +32,12 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="20" Text="Prescription" FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
             </StackPanel>
-            <ListView Margin="20" Background="Transparent" BorderThickness="0" ItemsSource="{Binding PrescriptionCollection}" SelectedIndex="{Binding SelectedPrescriptionIndex}">
+            <TextBlock Margin="20" Text="Your prescription list is empty." 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"
+                       Visibility="{Binding IsPrescriptionEmpty, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=False}"/>
+            <ListView Margin="20" Background="Transparent" BorderThickness="0" ItemsSource="{Binding PrescriptionCollection}" 
+                      Visibility="{Binding IsPrescriptionEmpty, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <BulletDecorator>
@@ -56,7 +61,12 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="20" Text="Pictures" FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
             </StackPanel>
-            <ListView Margin="20" Background="Transparent" BorderThickness="0" ItemsSource="{Binding PicturesCollection}">
+            <TextBlock Margin="20" Text="Your picture list is empty." 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"
+                       Visibility="{Binding IsPicturesEmpty, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=False}"/>
+            <ListView Margin="20" Background="Transparent" BorderThickness="0" ItemsSource="{Binding PicturesCollection}"
+                      Visibility="{Binding IsPicturesEmpty, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

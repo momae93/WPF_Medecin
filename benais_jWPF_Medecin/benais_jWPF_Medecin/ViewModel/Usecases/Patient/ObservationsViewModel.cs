@@ -206,7 +206,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                     {
                         list.Add(observation);
                         weightList.Add(observation.Weight);
-                        pressureList.Add(observation.Weight);
+                        pressureList.Add(observation.BloodPressure);
                         dateList.Add(observation.Date.ToString());
                     }
                     DispatchService.Invoke(() => {
