@@ -43,7 +43,7 @@
                 <ContentControl Content="{Binding DetailsUC, Mode=TwoWay}"/>
             </TabItem>
             <TabItem Header="OBSERVATIONS">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Observations</TextBlock>
+                <ContentControl Content="{Binding ObservationsUC, Mode=TwoWay}"/>
             </TabItem>
             <TabItem Header="GRAPH">
                 <ContentControl Content="{Binding ChartUC, Mode=TwoWay}"/>

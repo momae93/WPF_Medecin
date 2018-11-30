@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="0" Grid.RowSpan="4" Background="{StaticResource ColorDarkBlueAsphaltBrush}"/>
+        <StackPanel Grid.Column="0" Grid.RowSpan="4" Background="{StaticResource ColorDarkBlueMidnightBrush}"/>
         <StackPanel Grid.Column="0" Grid.Row="0" Margin="20" Orientation="Horizontal">
             <Ellipse Margin="10" Width="80" Height="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Ellipse.Fill>
@@ -40,9 +40,8 @@
             <Button Width="200" Style="{StaticResource ButtonUsersStyle}"  Margin="0 10 0 0" Command="{Binding PatientsViewCommand}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeLarge}"/>
             <Button Width="200" Style="{StaticResource ButtonUsersStyle}"  Margin="0 10 0 0" Command="{Binding UsersViewCommand}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeLarge}"/>
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="2">
-            <Button Width="200" Margin="20" Command="{Binding LogoutCommand}">Logout</Button>
-        </StackPanel>
+        <Button Grid.Row="2" Margin="20" Style="{StaticResource ButtonLogoutStyle}" Foreground="White" FontSize="{StaticResource FontSizeLarge}" Command="{Binding LogoutCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">Log out</Button>
+
         <ContentControl Grid.Column="1" Grid.RowSpan="4" Content="{Binding CurrentUC}"/>
     </Grid>
 </UserControl>

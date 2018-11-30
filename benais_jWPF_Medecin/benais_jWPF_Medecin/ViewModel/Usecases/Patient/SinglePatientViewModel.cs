@@ -115,10 +115,10 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                         DetailsUC.UpdateDefaultStyle();
                         break;
                     case EPatientUserControl.OBSERVATIONS:
+                        ObservationsUC = new ObservationsPatientUC(_currentLogin, _idPatient);
                         break;
                     case EPatientUserControl.GRAPH:
                         ChartUC = new ChartPatientUC(_currentLogin, _idPatient);
-                        DetailsUC.UpdateDefaultStyle();
                         break;
                     case EPatientUserControl.LIVE:
                         LiveUC = new LivePatientUC(_currentLogin, _idPatient);
@@ -132,11 +132,6 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 throw;
             }
         }
-
-        #endregion
-
-        #region Method
-
 
         #endregion
     }

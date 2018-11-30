@@ -74,6 +74,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceObservationReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServicePatientReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,6 +103,7 @@
     <Compile Include="ViewModel\Usecases\Patient\ChartPatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\DetailsPatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\LivePatientViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Patient\ObservationsViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\SinglePatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Popup\RetryLoginViewModel.cs" />
     <Compile Include="ViewModel\Usecases\User\AddUserViewModel.cs" />
@@ -165,6 +171,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Usecases\Patient\ObservationsPatientUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Usecases\Patient\SinglePatientUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,6 +218,9 @@
     </Compile>
     <Compile Include="View\Usecases\Patient\LivePatientUC.xaml.cs">
       <DependentUpon>LivePatientUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usecases\Patient\ObservationsPatientUC.xaml.cs">
+      <DependentUpon>ObservationsPatientUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usecases\Patient\SinglePatientUC.xaml.cs">
       <DependentUpon>SinglePatientUC.xaml</DependentUpon>
@@ -262,6 +275,19 @@
     <None Include="Connected Services\ServiceLiveReference\ServiceLive1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ServiceObservationReference\ServiceObservation.wsdl" />
+    <None Include="Connected Services\ServiceObservationReference\ServiceObservation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceObservationReference\ServiceObservation1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceObservationReference\ServiceObservation2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceObservationReference\ServiceObservation3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServicePatientReference\benais_jWPF_Medecin.ServicePatientReference.Patient.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -290,6 +316,13 @@
     </None>
     <None Include="Connected Services\ServiceUserReference\ServiceUser2.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceObservationReference\ServiceObservation.disco" />
+    <None Include="Connected Services\ServiceObservationReference\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceObservationReference\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceObservationReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
@@ -323,6 +356,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceLiveReference\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceObservationReference\" />
     <WCFMetadataStorage Include="Connected Services\ServicePatientReference\" />
     <WCFMetadataStorage Include="Connected Services\ServiceUserReference\" />
   </ItemGroup>
