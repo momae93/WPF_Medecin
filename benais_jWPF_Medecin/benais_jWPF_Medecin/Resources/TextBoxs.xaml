@@ -109,4 +109,33 @@
         </Setter>
     </Style>
 
+    <Style  x:Key="FormMultilineContentControl" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="formDescription" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoRegular}" VerticalAlignment="Top" Text="{TemplateBinding Tag}" HorizontalAlignment="Left"/>
+                        <TextBox x:Name="formTextbox" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Background="{StaticResource ColorGreyCloudBrush}" Style="{StaticResource FormTextBoxPlaceholder}"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.2" Storyboard.TargetName="formDescription" Storyboard.TargetProperty="Foreground.Color" To="{StaticResource ColorOrange}"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.2" Storyboard.TargetName="formDescription" Storyboard.TargetProperty="Foreground.Color" To="{StaticResource ColorDarkBlueAsphalt}"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

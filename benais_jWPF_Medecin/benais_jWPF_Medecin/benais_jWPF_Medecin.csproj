@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BusinessManagement\LoginBM.cs" />
+    <Compile Include="BusinessManagement\ObservationBM.cs" />
     <Compile Include="BusinessManagement\PatientBM.cs" />
     <Compile Include="BusinessManagement\UserBM.cs" />
     <Compile Include="Common\Exceptions\CustomServerException.cs" />
@@ -89,14 +90,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\ObservationDA.cs" />
     <Compile Include="DataAccess\PatientDA.cs" />
     <Compile Include="DataAccess\UserDA.cs" />
     <Compile Include="Model\Enum\EPatientUserControl.cs" />
     <Compile Include="Model\Enum\EUserControl.cs" />
+    <Compile Include="Model\Picture.cs" />
+    <Compile Include="Model\Prescription.cs" />
     <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\Pattern\DispatchService.cs" />
     <Compile Include="ViewModel\Pattern\Mediator.cs" />
+    <Compile Include="ViewModel\Usecases\Patient\AddObservationViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\AddPatientViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Login\LoginViewModel.cs" />
@@ -112,6 +117,7 @@
     <Compile Include="ViewModel\Usecases\Patient\PatientsViewModel.cs" />
     <Compile Include="ViewModel\Pattern\PageMediator.cs" />
     <Compile Include="ViewModel\Usecases\User\UsersViewModel.cs" />
+    <Compile Include="ViewModel\Utils\ObservableCollectionExtension.cs" />
     <Compile Include="ViewModel\Utils\StringExtension.cs" />
     <Compile Include="View\BaseUC.cs" />
     <Compile Include="View\Converters\BooleanToColorConverter.cs" />
@@ -152,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Texts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Usecases\Patient\AddObservationUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +216,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Usecases\Patient\AddObservationUC.xaml.cs">
+      <DependentUpon>AddObservationUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usecases\Patient\AddPatientUC.xaml.cs">
       <DependentUpon>AddPatientUC.xaml</DependentUpon>

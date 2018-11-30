@@ -25,17 +25,36 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="8*"/>
                 </Grid.ColumnDefinitions>
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="7*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView Grid.Row="0" ItemsSource="{Binding ObservationsList}" SelectedItem="{Binding SelectedObservation}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Date}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </ScrollViewer>
+                    <Button VerticalAlignment="Center" Grid.Row="2" Content="Add observation"
+                            Style="{StaticResource ButtonTransparentStyle}" 
+                            Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}"
+                            Command="{Binding AddObservationCommand}"
+                            FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
+                    <Button VerticalAlignment="Center" Grid.Row="2" Content="Cancel"
+                            Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}"
+                            Style="{StaticResource ButtonTransparentStyle}" 
+                            Command="{Binding CancelAddObservationCommand}"
+                            FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
+                </Grid>
 
-                <ListView Grid.RowSpan="4" ItemsSource="{Binding ObservationsList}" SelectedItem="{Binding SelectedObservation}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Date}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}"
+                              Margin="10" Grid.Column="1" VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -89,13 +108,18 @@
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
+
+                <ScrollViewer Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}"
+                              Margin="10" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                    <ContentControl Content="{Binding AddObservationUC, Mode=TwoWay}"/>
+                </ScrollViewer>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <lvc:CartesianChart Grid.Column="0" Series="{Binding WeightCollection}" LegendLocation="Right">
+                <lvc:CartesianChart Grid.Column="0" Margin="10" Series="{Binding WeightCollection}" LegendLocation="Right">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis Title="Value"></lvc:Axis>
                     </lvc:CartesianChart.AxisY>
@@ -103,7 +127,7 @@
                         <lvc:Axis Title="Date" Labels="{Binding DatesCollection}"></lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
-                <lvc:CartesianChart Grid.Column="1" Series="{Binding BloodPressureCollection}" LegendLocation="Right">
+                <lvc:CartesianChart Grid.Column="1" Margin="10" Series="{Binding BloodPressureCollection}" LegendLocation="Right">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis Title="Value"></lvc:Axis>
                     </lvc:CartesianChart.AxisY>

@@ -7,6 +7,10 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LiveCharts.Helpers;
+using System;
+using System.Windows;
+using benais_jWPF_Medecin.View.Usecases.Patient;
+using System.Windows.Controls;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {
@@ -19,6 +23,7 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private bool _isLoading;
         private bool _isAddView;
         private PatientBM _patientBM;
+        private ObservationBM _observationBM;
         private ServicePatientReference.Patient _selectedPatient;
         private ServicePatientReference.Observation _selectedObservation;
         private ObservableCollection<ServicePatientReference.Observation> _observationList;
@@ -26,7 +31,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private ObservableCollection<string> _datesCollection;
         private SeriesCollection _bloodPressureCollection;
         private SeriesCollection _weightCollection;
-            
+
+        private UserControl _addObservationUC;
+
         #endregion
 
         #region Getters/Setters
@@ -103,6 +110,16 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(WeightCollection));
             }
         }
+
+        public UserControl AddObservationUC
+        {
+            get { return _addObservationUC; }
+            set
+            {
+                _addObservationUC = value;
+                OnPropertyChanged(nameof(AddObservationUC));
+            }
+        }
         
         #endregion
 
@@ -113,11 +130,14 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             _currentLogin = currentLogin;
             _idPatient = idPatient;
             _patientBM = new PatientBM();
+            _observationBM = new ObservationBM();
             ObservationsList = new ObservableCollection<ServicePatientReference.Observation>();
             IsAddView = false;
             InitializeCommands();
             InitializeGraph();
             InitializePatient(idPatient);
+
+            Mediator.Register("Observations_UC", OnObservationAdd);
         }
 
         #endregion
@@ -135,6 +155,12 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             }
         }
 
+        public void AddObservation()
+        {
+            IsAddView = true;
+            AddObservationUC = new AddObservationUC();
+        }
+
         private ICommand _cancelAddObservationCommand;
         public ICommand CancelAddObservationCommand
         {
@@ -146,44 +172,6 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             }
         }
 
-        private ICommand _confirmObservationCommand;
-        public ICommand ConfirmObservationCommand
-        {
-            get { return _confirmObservationCommand; }
-            set
-            {
-                _confirmObservationCommand = value;
-                OnPropertyChanged(nameof(ConfirmObservationCommand));
-            }
-        }
-
-        /// <summary>
-        /// Add observation in database
-        /// </summary>
-        private void ConfirmObservation()
-        {
-            //FIXME
-        }
-
-        private ICommand _addObservationPictureCommand;
-        public ICommand AddObservationPictureCommand
-        {
-            get { return _addObservationPictureCommand; }
-            set
-            {
-                _addObservationPictureCommand = value;
-                OnPropertyChanged(nameof(AddObservationPictureCommand));
-            }
-        }
-
-        /// <summary>
-        /// Add pictures into existing list of picture
-        /// </summary>
-        private void AddObservationPicture()
-        {
-            //FIXME
-        }
-
         #endregion
 
         #region Methods
@@ -193,10 +181,8 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         /// </summary>
         private void InitializeCommands()
         {
-            AddObservationCommand = new RelayCommand(param => IsAddView = true, param => true);
+            AddObservationCommand = new RelayCommand(param => AddObservation(), param => true);
             CancelAddObservationCommand = new RelayCommand(param => IsAddView = false, param => true);
-            ConfirmObservationCommand = new RelayCommand(param => ConfirmObservation(), param => true);
-            AddObservationPictureCommand = new RelayCommand(param => AddObservationPicture(), param => true);
         }
 
         /// <summary>
@@ -266,6 +252,21 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             BloodPressureCollection[0].Values = weightList.AsChartValues();
             WeightCollection[0].Values = pressureList.AsChartValues();
             DatesCollection = new ObservableCollection<string>(dateList);
+        }
+
+        public void OnObservationAdd(object param)
+        {
+            try
+            {
+                ServiceObservationReference.Observation observation = (ServiceObservationReference.Observation)param;
+                _observationBM.AddObservation(_idPatient, observation);
+                InitializePatient(_idPatient);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error while adding observation");
+                throw;
+            }
         }
 
         #endregion

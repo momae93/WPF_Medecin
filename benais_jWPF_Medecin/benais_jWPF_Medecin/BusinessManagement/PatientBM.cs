@@ -13,7 +13,6 @@ namespace benais_jWPF_Medecin.BusinessManagement
 
         public Patient GetPatient(int id)
         {
-            Thread.Sleep(4000);
             return new PatientDA().GetPatient(id);
         }
 
