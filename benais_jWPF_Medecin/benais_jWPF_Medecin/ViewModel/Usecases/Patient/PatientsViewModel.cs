@@ -12,7 +12,9 @@ namespace benais_jWPF_Medecin.ViewModel
         #region Variables
 
         private string _currentLogin;
+        private bool _isReadOnly;
         private PatientBM _patientBM;
+        private UserBM _userBM;
         private ObservableCollection<Patient> _patientList;
         private Patient selectedPatient;
 
@@ -20,6 +22,15 @@ namespace benais_jWPF_Medecin.ViewModel
 
         #region Getters/Setters
 
+        public bool IsReadOnly
+        {
+            get { return _isReadOnly; }
+            set
+            {
+                _isReadOnly = value;
+                OnPropertyChanged(nameof(IsReadOnly));
+            }
+        }
         public ObservableCollection<Patient> PatientList
         {
             get { return _patientList; }
@@ -47,6 +58,8 @@ namespace benais_jWPF_Medecin.ViewModel
         {
             this._currentLogin = login;
             _patientBM = new PatientBM();
+            _userBM = new UserBM(login);
+            IsReadOnly = _userBM.IsUserReadOnly(login);
             PatientList = new ObservableCollection<Patient>(_patientBM.GetListPatient());
             DeletePatientCommand = new RelayCommand(param => DeletePatient(), param => true);
             AddPatientCommand = new RelayCommand(param => ChangeView(), param => true);

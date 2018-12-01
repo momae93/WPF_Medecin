@@ -17,10 +17,38 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Patients" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeXXLarge}"/>
-            <Button Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding AddPatientCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0">+ Add patient</Button>
+            <Button Visibility="{Binding IsReadOnly, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}"
+                    Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding AddPatientCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0">+ Add patient</Button>
         </Grid>
 
-        <DataGrid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+        <DataGrid x:Name="DatagridRead"
+                  Visibility="{Binding IsReadOnly, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=False}" 
+                  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+                  HeadersVisibility="Column"  GridLinesVisibility="None" AutoGenerateColumns="False"
+                  Background="White" Margin="30" BorderThickness="0"
+                  ColumnHeaderStyle="{StaticResource basicDataGridColumnHeader}"
+                  CellStyle="{StaticResource basicDataGridCell}"
+                  ItemsSource="{Binding PatientList}" SelectedItem="{Binding Path=SelectedPatient}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="*" Binding="{Binding Id}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTextColumn Header="Firstname" Width="*" Binding="{Binding Firstname}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTextColumn Header="Birthday" Width="*" Binding="{Binding Birthday}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Foreground="White" Width="90" Style="{StaticResource ButtonDetailsStyle}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DetailsPatientCommand}" Content="Details"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="DatagridWrite"
+                  Visibility="{Binding IsReadOnly, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}" 
+                  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
                   HeadersVisibility="Column"  GridLinesVisibility="None" AutoGenerateColumns="False"
                   Background="White" Margin="30" BorderThickness="0"
