@@ -2,7 +2,6 @@
 using benais_jWPF_Medecin.View.Usecases.Patient;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using System;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -82,27 +81,32 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             _currentLogin = login;
             _idPatient = idPatient;
             DetailsUC = new DetailsPatientUC(_currentLogin, _idPatient);
-            BackCommand = new RelayCommand(param => Back(), param => true);
+            InitializeCommands();
         }
 
         #endregion
 
         #region Command
 
-        /// <summary>
-        /// Load patients user control
-        /// </summary>
         private ICommand _backCommand;
         public ICommand BackCommand
         {
             get { return _backCommand; }
             set { _backCommand = value; }
         }
+
+        /// <summary>
+        /// Load patients user control
+        /// </summary>
         private void Back()
         {
             PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
         }
 
+        /// <summary>
+        /// Handles subview navigation
+        /// </summary>
+        /// <param name="index"></param>
         private void ChangeUC(int index)
         {
             try
@@ -127,10 +131,20 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                         break;
                 }
             }
-            catch (Exception e)
-            {
-                throw;
-            }
+            catch (Exception)
+            { }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Initialize all commands
+        /// </summary>
+        private void InitializeCommands()
+        {
+            BackCommand = new RelayCommand(param => Back(), param => true);
         }
 
         #endregion

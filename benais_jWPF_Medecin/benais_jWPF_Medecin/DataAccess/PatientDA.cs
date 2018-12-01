@@ -18,7 +18,6 @@ namespace benais_jWPF_Medecin.DataAccess
         /// <returns></returns>
         public Patient[] GetListPatient()
         {
-            Thread.Sleep(4000);
             return _service.GetListPatient();
         }
 
