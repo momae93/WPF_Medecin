@@ -1,4 +1,5 @@
-﻿using benais_jWPF_Medecin.ServiceUserReference;
+﻿using benais_jWPF_Medecin.Common.Exceptions;
+using benais_jWPF_Medecin.ServiceUserReference;
 using System;
 
 namespace benais_jWPF_Medecin.DataAccess
@@ -26,6 +27,7 @@ namespace benais_jWPF_Medecin.DataAccess
             }
             catch (Exception)
             {
+
                 return false;
             }
         }

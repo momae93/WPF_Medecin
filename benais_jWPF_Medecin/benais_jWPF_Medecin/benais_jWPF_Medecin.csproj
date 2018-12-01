@@ -69,6 +69,7 @@
     <Compile Include="BusinessManagement\ObservationBM.cs" />
     <Compile Include="BusinessManagement\PatientBM.cs" />
     <Compile Include="BusinessManagement\UserBM.cs" />
+    <Compile Include="Common\Exceptions\CustomLargePictureException.cs" />
     <Compile Include="Common\Exceptions\CustomServerException.cs" />
     <Compile Include="Connected Services\ServiceLiveReference\Reference.cs">
       <AutoGen>True</AutoGen>

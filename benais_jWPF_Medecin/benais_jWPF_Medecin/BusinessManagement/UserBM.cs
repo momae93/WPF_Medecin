@@ -1,5 +1,7 @@
-﻿using benais_jWPF_Medecin.DataAccess;
+﻿using benais_jWPF_Medecin.Common.Exceptions;
+using benais_jWPF_Medecin.DataAccess;
 using benais_jWPF_Medecin.ServiceUserReference;
+using System.Collections.Generic;
 
 namespace benais_jWPF_Medecin.BusinessManagement
 {
@@ -19,33 +21,90 @@ namespace benais_jWPF_Medecin.BusinessManagement
         /// <returns></returns>
         public bool Disconnect()
         {
-            return new UserDA().Disconnect(_login);
+            try
+            {
+                return new UserDA().Disconnect(_login);
+            }
+            catch (System.Exception e)
+            {
+                if (e is System.ServiceModel.EndpointNotFoundException)
+                    throw new CustomServerException();
+                return false;
+            }
         }
 
         public User GetUser()
         {
-            return new UserDA().GetUser(_login);
+            try
+            {
+                return new UserDA().GetUser(_login);
+            }
+            catch (System.Exception e)
+            {
+                if (e is System.ServiceModel.EndpointNotFoundException)
+                    throw new CustomServerException();
+                return null;
+            }
         }
 
         public User[] GetListUser()
         {
-            return new UserDA().GetListUser();
+            try
+            {
+                return new UserDA().GetListUser();
+            }
+            catch (System.Exception e)
+            {
+                if (e is System.ServiceModel.EndpointNotFoundException)
+                    throw new CustomServerException();
+                return null;
+            }
         }
 
         public bool DeleteUser(string login)
         {
-            return new UserDA().DeleteUser(login);
+            try
+            {
+                return new UserDA().DeleteUser(login);
+            }
+            catch (System.Exception e)
+            {
+                if (e is System.ServiceModel.EndpointNotFoundException)
+                    throw new CustomServerException();
+                return false;
+            }
         }
 
         public bool IsUserReadOnly(string login)
         {
-            string role = new UserDA().GetRole(login);
-            return role == "Infirmière";
+            try
+            {
+                string role = new UserDA().GetRole(login);
+                return role == "Infirmière";
+            }
+            catch (System.Exception e)
+            {
+                if (e is System.ServiceModel.EndpointNotFoundException)
+                    throw new CustomServerException();
+                return false;
+            }
+
         }
 
         public bool AddUser(User user)
         {
-            return new UserDA().AddUser(user);
+            try
+            {
+                return new UserDA().AddUser(user);
+            }
+            catch (System.Exception e)
+            {
+                if (e is System.ServiceModel.ProtocolException)
+                    throw new CustomLargePictureException();
+                if (e is System.ServiceModel.EndpointNotFoundException)
+                    throw new CustomServerException();
+                return false;
+            }
         }
     }
 }
