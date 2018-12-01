@@ -1,8 +1,12 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
+using benais_jWPF_Medecin.Common.Exceptions;
 using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.ServiceUserReference;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
+using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,7 +22,8 @@ namespace benais_jWPF_Medecin.ViewModel
         private bool _isReadOnly;
         private ObservableCollection<User> _userList;
         private User _selectedUser;
-        
+        private bool _isLoading;
+
         #endregion
 
         #region Getters/Setters
@@ -50,6 +55,15 @@ namespace benais_jWPF_Medecin.ViewModel
                 OnPropertyChanged(nameof(IsReadOnly));
             }
         }
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
 
         #endregion
 
@@ -59,6 +73,7 @@ namespace benais_jWPF_Medecin.ViewModel
         {
             _currentLogin = login;
             _sessionBM = new UserBM(login);
+            IsLoading = false;
             IsReadOnly = _sessionBM.IsUserReadOnly(login);
             UserList = new ObservableCollection<User>(_sessionBM.GetListUser());
             DeleteUserCommand = new RelayCommand(param => DeleteUser(), param => true);
@@ -101,6 +116,37 @@ namespace benais_jWPF_Medecin.ViewModel
         private void ChangeView()
         {
             PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS_ADD, _currentLogin);
+        }
+
+        #endregion
+
+        #region Methods
+
+        private async Task InitializeUsers(int idPatient)
+        {
+            IsLoading = true;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    UserList = new ObservableCollection<User>(_sessionBM.GetListUser());
+                });
+            }
+            catch(Exception e)
+            {
+                if (e is CustomServerException)
+                    DispatchService.Invoke(() => ShowServerExceptionWindow());
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        private void ShowServerExceptionWindow()
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow();
+            serverExceptionWindow.Show();
         }
 
         #endregion

@@ -111,7 +111,9 @@
     <Compile Include="ViewModel\Usecases\Patient\LivePatientViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\ObservationsViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Patient\SinglePatientViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Popup\PictureExceptionViewModel.cs" />
     <Compile Include="ViewModel\Usecases\Popup\RetryLoginViewModel.cs" />
+    <Compile Include="ViewModel\Usecases\Popup\ServerExceptionViewModel.cs" />
     <Compile Include="ViewModel\Usecases\User\AddUserViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -191,7 +193,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Usecases\PopupWindows\PictureExceptionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Usecases\PopupWindows\RetryLoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Usecases\PopupWindows\ServerExceptionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,8 +250,14 @@
     <Compile Include="View\Usecases\Patient\SinglePatientUC.xaml.cs">
       <DependentUpon>SinglePatientUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Usecases\PopupWindows\PictureExceptionWindow.xaml.cs">
+      <DependentUpon>PictureExceptionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usecases\PopupWindows\RetryLoginWindow.xaml.cs">
       <DependentUpon>RetryLoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usecases\PopupWindows\ServerExceptionWindow.xaml.cs">
+      <DependentUpon>ServerExceptionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usecases\User\AddUserUC.xaml.cs">
       <DependentUpon>AddUserUC.xaml</DependentUpon>
@@ -278,6 +294,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\Images\computer.png" />
+    <Resource Include="Resources\Images\picture.png" />
     <Resource Include="Resources\Images\default-picture.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -4,14 +4,14 @@ using System.Windows;
 namespace benais_jWPF_Medecin.View.Usecases.PopupWindows
 {
     /// <summary>
-    /// Logique d'interaction pour RetryLoginWindow.xaml
+    /// Logique d'interaction pour ServerExceptionWindow.xaml
     /// </summary>
-    public partial class RetryLoginWindow : Window
+    public partial class ServerExceptionWindow : Window
     {
-        public RetryLoginWindow()
+        public ServerExceptionWindow()
         {
             InitializeComponent();
-            this.DataContext = new RetryLoginViewModel();
+            this.DataContext = new ServerExceptionViewModel();
         }
     }
 }

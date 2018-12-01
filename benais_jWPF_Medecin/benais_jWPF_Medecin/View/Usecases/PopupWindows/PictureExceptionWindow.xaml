@@ -1,0 +1,39 @@
+﻿<Window x:Class="benais_jWPF_Medecin.View.Usecases.PopupWindows.PictureExceptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:benais_jWPF_Medecin.View.Usecases.PopupWindows"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        MaxHeight="350" MaxWidth="400"
+        MinHeight="350" MinWidth="400"
+        Title="Error">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{StaticResource ColorRedAlzarinBrush}">
+            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0" Width="64" Height="64" Source="../../../Resources/Images/picture.png"/>
+        </Grid>
+        <StackPanel Grid.Row="1" Margin="20">
+            <TextBlock Margin="20" Text="Warning !"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Foreground="{StaticResource ColorDarkBlueAsphaltBrush}"
+                       FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeXLarge}"/>
+            <TextBlock Margin="10" Text="One of the picture you are trying to add is too big."
+                       Foreground="{StaticResource ColorDarkBlueAsphaltBrush}"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
+        </StackPanel>
+        <Button Grid.Row="2" 
+                HorizontalAlignment="Center"
+                Style="{StaticResource ButtonDeleteStyle}"  Foreground="White"
+                Command="{Binding CloseWindowCommand}"
+                FontSize="{StaticResource FontSizeSmall}" FontFamily="{StaticResource LatoBold}" 
+                Width="90" Height="40"
+                Content="CLOSE"/>
+    </Grid>
+</Window>
