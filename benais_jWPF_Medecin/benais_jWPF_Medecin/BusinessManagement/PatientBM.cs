@@ -1,4 +1,5 @@
-﻿using benais_jWPF_Medecin.DataAccess;
+﻿using benais_jWPF_Medecin.Common.Exceptions;
+using benais_jWPF_Medecin.DataAccess;
 using benais_jWPF_Medecin.ServicePatientReference;
 using System.Threading;
 
@@ -8,22 +9,50 @@ namespace benais_jWPF_Medecin.BusinessManagement
     {
         public Patient[] GetListPatient()
         {
-            return new PatientDA().GetListPatient();
+            try
+            {
+                return new PatientDA().GetListPatient();
+            }
+            catch (System.Exception e)
+            {
+                return null;
+            }
         }
 
         public Patient GetPatient(int id)
         {
-            return new PatientDA().GetPatient(id);
+            try
+            {
+                return new PatientDA().GetPatient(id);
+            }
+            catch (System.Exception e)
+            {
+                return null;
+            }
         }
 
         public bool AddPatient(Patient patient)
         {
-            return new PatientDA().AddPatient(patient);
+            try
+            {
+                return new PatientDA().AddPatient(patient);
+            }
+            catch (System.Exception e)
+            {
+                return false;
+            }
         }
 
         public bool DeletePatient(int id)
         {
-            return new PatientDA().DeletePatient(id);
+            try
+            {
+                return new PatientDA().DeletePatient(id);
+            }
+            catch (System.Exception e)
+            {
+                return false;
+            }
         }
     }
 }
