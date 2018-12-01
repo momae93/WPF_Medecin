@@ -11,7 +11,7 @@ namespace benais_jWPF_Medecin.View
         public AddUserUC(string login)
         {
             InitializeComponent();
-            this.DataContext = new MainAddUserViewModel(login);
+            this.DataContext = new AddUserViewModel(login);
         }
     }
 }

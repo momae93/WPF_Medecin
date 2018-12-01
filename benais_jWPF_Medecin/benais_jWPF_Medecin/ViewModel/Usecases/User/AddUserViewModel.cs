@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 
 namespace benais_jWPF_Medecin.ViewModel
 {
-    public class MainAddUserViewModel: BaseViewModel
+    public class AddUserViewModel: BaseViewModel
     {
         #region Variables
 
@@ -92,7 +92,7 @@ namespace benais_jWPF_Medecin.ViewModel
 
         #region Constructor
 
-        public MainAddUserViewModel(string login)
+        public AddUserViewModel(string login)
         {
             _currentLogin = login;
             _sessionBM = new UserBM(login);

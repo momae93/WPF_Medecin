@@ -116,7 +116,6 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 {
                     case EPatientUserControl.DETAILS:
                         DetailsUC = new DetailsPatientUC(_currentLogin, _idPatient);
-                        DetailsUC.UpdateDefaultStyle();
                         break;
                     case EPatientUserControl.OBSERVATIONS:
                         ObservationsUC = new ObservationsPatientUC(_currentLogin, _idPatient);

@@ -42,6 +42,6 @@
         </StackPanel>
         <Button Grid.Row="2" Margin="20" Style="{StaticResource ButtonLogoutStyle}" Foreground="White" FontSize="{StaticResource FontSizeLarge}" Command="{Binding LogoutCommand}" VerticalAlignment="Center" HorizontalAlignment="Center">Log out</Button>
 
-        <ContentControl Grid.Column="1" Grid.RowSpan="4" Content="{Binding CurrentUC}"/>
+        <ContentControl Grid.Column="1" Grid.RowSpan="4" Content="{Binding CurrentUC, Mode=TwoWay}"/>
     </Grid>
 </UserControl>

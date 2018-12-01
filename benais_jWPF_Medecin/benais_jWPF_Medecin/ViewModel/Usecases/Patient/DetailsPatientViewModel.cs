@@ -2,7 +2,6 @@
 using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient

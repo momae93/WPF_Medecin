@@ -58,9 +58,7 @@ namespace benais_jWPF_Medecin.ViewModel
                 }
             }
             catch (Exception)
-            {
-                MessageBox.Show("Failed changing view");
-            }
+            {}
         }
 
         #endregion
