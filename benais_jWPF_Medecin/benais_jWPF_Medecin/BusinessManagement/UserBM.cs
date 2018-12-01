@@ -37,6 +37,12 @@ namespace benais_jWPF_Medecin.BusinessManagement
             return new UserDA().DeleteUser(login);
         }
 
+        public bool IsUserReadOnly(string login)
+        {
+            string role = new UserDA().GetRole(login);
+            return role == "Infirmière";
+        }
+
         public bool AddUser(User user)
         {
             return new UserDA().AddUser(user);

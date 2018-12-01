@@ -17,10 +17,38 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Users" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeXXLarge}"/>
-            <Button Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding AddUserCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0">+ Add user</Button>
+            <Button Visibility="{Binding IsReadOnly, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}" 
+                    Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding AddUserCommand}" 
+                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 20 0">+ Add user</Button>
         </Grid>
 
-        <DataGrid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+        <DataGrid x:Name="DatagridReadOnly"
+                  Visibility="{Binding IsReadOnly, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=False}" 
+                  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+                  HeadersVisibility="Column"  GridLinesVisibility="None" AutoGenerateColumns="False"
+                  Background="White" Margin="30" BorderThickness="0"
+                  ColumnHeaderStyle="{StaticResource basicDataGridColumnHeader}"
+                  CellStyle="{StaticResource basicDataGridCell}"
+                  ItemsSource="{Binding UserList}" SelectedItem="{Binding Path=SelectedUser}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTextColumn Header="Firstname" Width="*" Binding="{Binding Firstname}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTextColumn Header="Role" Width="*" Binding="{Binding Role}" Foreground="{StaticResource ColorGreyAsbestosBrush}"/>
+                <DataGridTemplateColumn Header="Connected" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Connected}" Foreground="{Binding Connected, Converter={StaticResource booleanToColorConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="DatagridWrite"
+                  Visibility="{Binding IsReadOnly, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}" 
+                  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
                   HeadersVisibility="Column"  GridLinesVisibility="None" AutoGenerateColumns="False"
                   Background="White" Margin="30" BorderThickness="0"
