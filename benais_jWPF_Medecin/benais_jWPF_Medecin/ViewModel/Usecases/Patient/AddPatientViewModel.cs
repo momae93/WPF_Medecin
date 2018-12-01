@@ -1,10 +1,13 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.Model.Enum;
+using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.ServicePatientReference;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using benais_jWPF_Medecin.ViewModel.Utils;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -57,9 +60,7 @@ namespace benais_jWPF_Medecin.ViewModel
         {
             _currentLogin = login;
             _patientBM = new PatientBM();
-
-            AddPatientCommand = new RelayCommand(param => AddPatient(), param => true);
-            BackCommand = new RelayCommand(param => Back(), param => true);
+            InitializeCommands();
         }
 
         #endregion
@@ -75,20 +76,35 @@ namespace benais_jWPF_Medecin.ViewModel
             get { return _addPatientCommand; }
             set { _addPatientCommand = value; }
         }
-        private void AddPatient()
+
+        /// <summary>
+        /// Add asynchronously a patient
+        /// </summary>
+        /// <returns></returns>
+        private async Task AddPatient()
         {
-            if (!Name.IsNullOrWhiteSpace() && !Firstname.IsNullOrWhiteSpace() && Birthday != null)
+            await Task.Run(() =>
             {
-                Patient patient = new Patient() { Name = Name, Firstname = Firstname, Birthday = Birthday, Observations = new List<Observation>().ToArray() };
-                if (_patientBM.AddPatient(patient))
-                    PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
-                else
-                    MessageBox.Show("Fail add user");
-            }
-            else
-            {
-                MessageBox.Show("Fields are empty");
-            }
+                try
+                {
+                    if (!Name.IsNullOrWhiteSpace() && !Firstname.IsNullOrWhiteSpace() && Birthday != null)
+                    {
+                        Patient patient = new Patient() { Name = Name, Firstname = Firstname, Birthday = Birthday, Observations = new List<Observation>().ToArray() };
+                        if (_patientBM.AddPatient(patient))
+                            DispatchService.Invoke(() => PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin));
+                        else
+                            DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.ADD_PATIENT));
+                    }
+                    else
+                    {
+                        DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.MISSING_FIELDS));
+                    }
+                }
+                catch (Exception)
+                {
+                    DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.ADD_PATIENT));
+                }
+            });
         }
 
         /// <summary>
@@ -103,6 +119,29 @@ namespace benais_jWPF_Medecin.ViewModel
         private void Back()
         {
             PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_PATIENTS, _currentLogin);
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Initialize all commands of the ViewModel
+        /// </summary>
+        private void InitializeCommands()
+        {
+            AddPatientCommand = new RelayCommand(param => AddPatient(), param => true);
+            BackCommand = new RelayCommand(param => Back(), param => true);
+        }
+
+        /// <summary>
+        /// Show pop up with custom message
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
+            serverExceptionWindow.Show();
         }
 
         #endregion

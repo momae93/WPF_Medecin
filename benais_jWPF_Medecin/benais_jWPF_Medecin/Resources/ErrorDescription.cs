@@ -17,5 +17,7 @@
         public static readonly string GETALL_PATIENT = "An error occured while fetching patients";
         public static readonly string GETSINGLE_PATIENT = "An error occured while fetching patient infos";
         public static readonly string ADD_PATIENT = "An error occured while adding a new patient";
+        public static readonly string ADD_PATIENT_OBSERVATION = "An error occured while adding a new observation";
+        public static readonly string GET_PATIENT_OBSERVATION = "An error occured while fetching patient observation infos";
     }
 }

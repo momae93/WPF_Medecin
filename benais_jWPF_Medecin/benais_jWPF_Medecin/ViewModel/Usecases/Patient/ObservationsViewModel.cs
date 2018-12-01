@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using LiveCharts.Helpers;
 using System;
-using System.Windows;
 using benais_jWPF_Medecin.View.Usecases.Patient;
 using System.Windows.Controls;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
+using benais_jWPF_Medecin.Resources;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {
@@ -245,9 +246,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         private async Task InitializePatient(int idPatient)
         {
             IsLoading = true;
-            try
+            await Task.Run(() =>
             {
-                await Task.Run(() =>
+                try
                 {
                     SelectedPatient = _patientBM.GetPatient(idPatient);
                     ObservableCollection<ServicePatientReference.Observation> list = new ObservableCollection<ServicePatientReference.Observation>();
@@ -266,12 +267,16 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                         ObservationsList = list;
                         UpdateGraph(weightList, pressureList, dateList);
                     });
-                });
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+                }
+                catch (Exception e)
+                {
+                    DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.GET_PATIENT_OBSERVATION));
+                }
+                finally
+                {
+                    IsLoading = false;
+                }
+            });
         }
 
         /// <summary>
@@ -300,6 +305,12 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             };
         }
 
+        /// <summary>
+        /// Updates graph values
+        /// </summary>
+        /// <param name="weightList"></param>
+        /// <param name="pressureList"></param>
+        /// <param name="dateList"></param>
         private void UpdateGraph(List<int> weightList, List<int> pressureList, List<string> dateList)
         {
             BloodPressureCollection[0].Values = weightList.AsChartValues();
@@ -309,20 +320,36 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             DatesCollection = new ObservableCollection<string>(dateList);
         }
 
-        public void OnObservationAdd(object param)
+        /// <summary>
+        /// Add new observation
+        /// </summary>
+        /// <param name="param"></param>
+        public async void OnObservationAdd(object param)
         {
-            try
+            await Task.Run(() =>
             {
-                ServiceObservationReference.Observation observation = (ServiceObservationReference.Observation)param;
-                _observationBM.AddObservation(_idPatient, observation);
-                IsAddView = false;
-                InitializePatient(_idPatient);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error while adding observation");
-                throw;
-            }
+                try
+                {
+                    ServiceObservationReference.Observation observation = (ServiceObservationReference.Observation)param;
+                    _observationBM.AddObservation(_idPatient, observation);
+                    IsAddView = false;
+                    InitializePatient(_idPatient);
+                }
+                catch (Exception e)
+                {
+                    DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.ADD_PATIENT_OBSERVATION));
+                }
+            });
+        }
+
+        /// <summary>
+        /// Show pop up with custom message
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
+            serverExceptionWindow.Show();
         }
 
         #endregion

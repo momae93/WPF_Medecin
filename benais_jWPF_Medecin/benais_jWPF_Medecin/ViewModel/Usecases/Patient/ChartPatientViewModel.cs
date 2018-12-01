@@ -1,26 +1,25 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
+using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.ServicePatientReference;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using LiveCharts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 {
-    public class ChartPatientViewModel: BaseViewModel
+    public class ChartPatientViewModel : BaseViewModel
     {
         #region Variables
 
         private string _currentLogin;
         private int _idPatient;
         private PatientBM _patientBM;
-        private SeriesCollection _seriesCollection; 
+        private SeriesCollection _seriesCollection;
         private List<string> _dates;
         private bool _isLoading;
 
@@ -74,6 +73,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 
         #region Method
 
+        /// <summary>
+        /// Initialize graph collection
+        /// </summary>
         private void InitializeGraph()
         {
             SeriesCollection = new SeriesCollection
@@ -91,12 +93,17 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             };
         }
 
+        /// <summary>
+        /// Fetch charts data asynchronously
+        /// </summary>
+        /// <param name="idPatient"></param>
+        /// <returns></returns>
         private async Task FetchChartData(int idPatient)
         {
             IsLoading = true;
-            try
+            await Task.Run(() =>
             {
-                await Task.Run(() =>
+                try
                 {
                     ServicePatientReference.Patient _selectedPatient = _patientBM.GetPatient(idPatient);
                     List<Observation> observations = _selectedPatient.Observations.OrderBy(x => x.Date).ToList();
@@ -105,19 +112,39 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                     List<string> dateList = observations.Select(x => x.Date.ToString()).ToList();
 
                     DispatchService.Invoke(() => UpdateGraph(weightList, pressureList, dateList));
-                });
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+                }
+                catch
+                {
+                    DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.GETSINGLE_PATIENT));
+                }
+                finally
+                {
+                    IsLoading = false;
+                }
+            });
         }
 
+        /// <summary>
+        /// Update graph values
+        /// </summary>
+        /// <param name="weightList"></param>
+        /// <param name="pressureList"></param>
+        /// <param name="dateList"></param>
         private void UpdateGraph(List<int> weightList, List<int> pressureList, List<string> dateList)
         {
             SeriesCollection[0].Values = weightList.AsChartValues();
             SeriesCollection[1].Values = pressureList.AsChartValues();
             Dates = dateList;
+        }
+
+        /// <summary>
+        /// Show pop up with custom message
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
+            serverExceptionWindow.Show();
         }
 
         #endregion

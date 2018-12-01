@@ -1,4 +1,7 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
+using benais_jWPF_Medecin.Resources;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
+using benais_jWPF_Medecin.ViewModel.Pattern;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,6 +50,8 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             }
         }
 
+        public object DispatcherService { get; private set; }
+
         #endregion
 
         #region Constructor
@@ -63,22 +68,42 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 
         #region Method
 
+        /// <summary>
+        /// Initialize patient infos
+        /// </summary>
+        /// <param name="idPatient"></param>
+        /// <returns></returns>
         private async Task InitializePatient(int idPatient)
         {
             IsLoading = true;
-            try
-            {
-                await Task.Run(() =>
+
+            await Task.Run(() =>
                 {
-                    SelectedPatient = _patientBM.GetPatient(idPatient);
-                    if (SelectedPatient.Observations != null)
-                        ObservationsNb = SelectedPatient.Observations.Length;
+                    try
+                    {
+                        SelectedPatient = _patientBM.GetPatient(idPatient);
+                        if (SelectedPatient.Observations != null)
+                            ObservationsNb = SelectedPatient.Observations.Length;
+                    }
+                    catch
+                    {
+                        DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.GETSINGLE_PATIENT));
+                    }
+                    finally
+                    {
+                        IsLoading = false;
+                    }
                 });
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+        }
+
+        /// <summary>
+        /// Show pop up with custom message
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
+            serverExceptionWindow.Show();
         }
 
         #endregion

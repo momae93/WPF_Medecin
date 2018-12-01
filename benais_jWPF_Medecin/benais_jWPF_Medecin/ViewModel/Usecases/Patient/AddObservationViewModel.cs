@@ -1,5 +1,7 @@
 ﻿using benais_jWPF_Medecin.Model;
+using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.View.Converters;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using benais_jWPF_Medecin.ViewModel.Utils;
 using System;
@@ -132,10 +134,13 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(AddObservationCommand));
             }
         }
+        /// <summary>
+        /// Add the observation and raises a popup if missing fields
+        /// </summary>
         private void AddObservation()
         {
             if (Weight <= 0 || BloodPressure <= 0)
-                MessageBox.Show("Incorrect input");
+                ShowServerExceptionWindow(ErrorDescription.MISSING_FIELDS);
             else
             {
                 ServiceObservationReference.Observation observation = new ServiceObservationReference.Observation()
@@ -161,7 +166,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(AddPrescriptionCommand));
             }
         }
-
+        /// <summary>
+        /// Add prescription
+        /// </summary>
         private void AddPrescription()
         {
             if (!string.IsNullOrWhiteSpace(Prescription))
@@ -182,6 +189,10 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 OnPropertyChanged(nameof(DeletePrescriptionCommand));
             }
         }
+        /// <summary>
+        /// Delete selected prescription
+        /// </summary>
+        /// <param name="id"></param>
         private void DeletePrescription(object id)
         {
             try
@@ -195,6 +206,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         }
 
         private ICommand _addPictureCommand;
+        /// <summary>
+        /// Add a picture
+        /// </summary>
         public ICommand AddPictureCommand
         {
             get { return _addPictureCommand; }
@@ -224,13 +238,16 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
         }
 
 
-        private ICommand _deletePicctureCommand;
+        private ICommand _deletePictureCommand;
+        /// <summary>
+        /// Delete selected picture
+        /// </summary>
         public ICommand DeletePictureCommand
         {
-            get { return _deletePicctureCommand; }
+            get { return _deletePictureCommand; }
             set
             {
-                _deletePicctureCommand = value;
+                _deletePictureCommand = value;
                 OnPropertyChanged(nameof(DeletePictureCommand));
             }
         }
@@ -257,6 +274,16 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             DeletePrescriptionCommand = new RelayCommand(param => DeletePrescription(param), param => true);
             AddPictureCommand = new RelayCommand(param => AddPicture(), param => true);
             DeletePictureCommand = new RelayCommand(param => DeletePicture(param), param => true);
+        }
+
+        /// <summary>
+        /// Show pop up with custom message
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
+            serverExceptionWindow.Show();
         }
 
         #endregion
