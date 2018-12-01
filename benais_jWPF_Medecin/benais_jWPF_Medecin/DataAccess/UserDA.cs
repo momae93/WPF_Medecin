@@ -1,7 +1,5 @@
-﻿using benais_jWPF_Medecin.Common.Exceptions;
-using benais_jWPF_Medecin.ServiceUserReference;
+﻿using benais_jWPF_Medecin.ServiceUserReference;
 using System;
-using System.Threading;
 
 namespace benais_jWPF_Medecin.DataAccess
 {
