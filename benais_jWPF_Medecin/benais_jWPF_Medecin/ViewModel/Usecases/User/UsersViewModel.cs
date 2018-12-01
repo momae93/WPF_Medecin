@@ -1,5 +1,4 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
-using benais_jWPF_Medecin.Common.Exceptions;
 using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.ServiceUserReference;
@@ -8,7 +7,6 @@ using benais_jWPF_Medecin.ViewModel.Pattern;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace benais_jWPF_Medecin.ViewModel
