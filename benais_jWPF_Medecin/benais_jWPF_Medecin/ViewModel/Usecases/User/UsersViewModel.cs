@@ -1,6 +1,7 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.Common.Exceptions;
 using benais_jWPF_Medecin.Model.Enum;
+using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.ServiceUserReference;
 using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace benais_jWPF_Medecin.ViewModel
 {
-    public class UsersViewModel: BaseViewModel
+    public class UsersViewModel : BaseViewModel
     {
         #region Variables
 
@@ -23,6 +24,7 @@ namespace benais_jWPF_Medecin.ViewModel
         private ObservableCollection<User> _userList;
         private User _selectedUser;
         private bool _isLoading;
+        private bool _showUsersGrid;
 
         #endregion
 
@@ -64,6 +66,15 @@ namespace benais_jWPF_Medecin.ViewModel
                 OnPropertyChanged(nameof(IsLoading));
             }
         }
+        public bool ShowUsersGrid
+        {
+            get { return _showUsersGrid; }
+            set
+            {
+                _showUsersGrid = value;
+                OnPropertyChanged(nameof(ShowUsersGrid));
+            }
+        }
 
         #endregion
 
@@ -75,10 +86,11 @@ namespace benais_jWPF_Medecin.ViewModel
             _sessionBM = new UserBM(login);
             IsLoading = false;
             IsReadOnly = _sessionBM.IsUserReadOnly(login);
-            UserList = new ObservableCollection<User>(_sessionBM.GetListUser());
+            UserList = new ObservableCollection<User>();
             DeleteUserCommand = new RelayCommand(param => DeleteUser(), param => true);
             AddUserCommand = new RelayCommand(param => ChangeView(), param => true);
             SelectedUser = null;
+            InitializeUsers();
         }
 
         #endregion
@@ -91,20 +103,31 @@ namespace benais_jWPF_Medecin.ViewModel
             get { return _deleteUserCommand; }
             set { _deleteUserCommand = value; }
         }
-        private void DeleteUser()
+
+        /// <summary>
+        /// Run async task to delete user
+        /// </summary>
+        private async void DeleteUser()
         {
-            if (SelectedUser != null)
+            await Task.Run(() =>
             {
-                bool isDeleted = _sessionBM.DeleteUser(SelectedUser.Login);
-                if (isDeleted)
+                try
                 {
-                    UserList.Remove(SelectedUser);
-                    SelectedUser = null;
-                    MessageBox.Show("Deleted");
+                    if (SelectedUser != null)
+                    {
+                        bool isDeleted = _sessionBM.DeleteUser(SelectedUser.Login);
+                        if (isDeleted)
+                        {
+                            DispatchService.Invoke(() => { UserList.Remove(SelectedUser); });
+                            SelectedUser = null;
+                        }
+                    }
                 }
-                else
-                    MessageBox.Show("Fail delete user");
-            }
+                catch (Exception)
+                {
+                    DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.DELETE_USER));
+                }
+            });
         }
 
         private ICommand _addUserCommand;
@@ -113,6 +136,10 @@ namespace benais_jWPF_Medecin.ViewModel
             get { return _addUserCommand; }
             set { _addUserCommand = value; }
         }
+
+        /// <summary>
+        /// Go to add user view
+        /// </summary>
         private void ChangeView()
         {
             PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS_ADD, _currentLogin);
@@ -122,30 +149,38 @@ namespace benais_jWPF_Medecin.ViewModel
 
         #region Methods
 
-        private async Task InitializeUsers(int idPatient)
+        /// <summary>
+        /// Fetch asynchronously the users
+        /// </summary>
+        /// <returns></returns>
+        private async Task InitializeUsers()
         {
             IsLoading = true;
-            try
+            await Task.Run(() =>
             {
-                await Task.Run(() =>
+                try
                 {
                     UserList = new ObservableCollection<User>(_sessionBM.GetListUser());
-                });
-            }
-            catch(Exception e)
-            {
-                if (e is CustomServerException)
-                    DispatchService.Invoke(() => ShowServerExceptionWindow());
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+                    ShowUsersGrid = UserList.Count != 0;
+                }
+                catch (Exception)
+                {
+                    DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.GETALL_USER));
+                }
+                finally
+                {
+                    IsLoading = false;
+                }
+            });
         }
 
-        private void ShowServerExceptionWindow()
+        /// <summary>
+        /// Show pop up with custom message
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
         {
-            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow();
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
             serverExceptionWindow.Show();
         }
 

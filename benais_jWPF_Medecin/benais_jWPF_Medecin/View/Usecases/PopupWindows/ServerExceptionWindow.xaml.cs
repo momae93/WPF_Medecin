@@ -8,10 +8,10 @@ namespace benais_jWPF_Medecin.View.Usecases.PopupWindows
     /// </summary>
     public partial class ServerExceptionWindow : Window
     {
-        public ServerExceptionWindow()
+        public ServerExceptionWindow(string description)
         {
             InitializeComponent();
-            this.DataContext = new ServerExceptionViewModel();
+            this.DataContext = new ServerExceptionViewModel(description);
         }
     }
 }

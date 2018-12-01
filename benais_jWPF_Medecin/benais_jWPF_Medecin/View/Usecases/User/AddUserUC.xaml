@@ -38,8 +38,8 @@
                         <TextBlock Margin="20" Text="PART 1: " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
                         <TextBlock Margin="0 10 10 10" Text="Basic informations" FontFamily="{StaticResource LatoRegular}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <ContentControl Margin="20 5 20 5" Tag="Firstname" Content="{Binding Firstname, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
-                    <ContentControl Margin="20 5 20 5" Tag="Name" Content="{Binding Name, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                    <ContentControl Margin="20 5 20 5" Tag="Firstname (*)" Content="{Binding Firstname, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                    <ContentControl Margin="20 5 20 5" Tag="Name (*)" Content="{Binding Name, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1" Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch" Background="White" Height="auto">
@@ -47,9 +47,9 @@
                         <TextBlock Margin="20" Text="PART 2: " FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
                         <TextBlock Margin="0 10 10 10" Text="Work informations" FontFamily="{StaticResource LatoRegular}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <ContentControl Margin="20 5 20 5" Tag="Login" Content="{Binding Login, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
-                    <ContentControl Margin="20 5 20 5" Tag="Role" Content="{Binding Role, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
-                    <ContentControl Margin="20 5 20 5" Tag="Password" Content="{Binding Password, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                    <ContentControl Margin="20 5 20 5" Tag="Login (*)" Content="{Binding Login, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                    <ContentControl Margin="20 5 20 5" Tag="Role (*)" Content="{Binding Role, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
+                    <ContentControl Margin="20 5 20 5" Tag="Password (*)" Content="{Binding Password, Mode=TwoWay}" Style="{StaticResource FormContentControl}"></ContentControl>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2" Orientation="Vertical" Margin="20" HorizontalAlignment="Stretch" Background="White" Height="auto">

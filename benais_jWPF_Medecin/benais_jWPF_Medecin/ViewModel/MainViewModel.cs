@@ -1,9 +1,11 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.Model.Enum;
+using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.ServiceUserReference;
 using benais_jWPF_Medecin.View;
 using benais_jWPF_Medecin.View.Patient;
 using benais_jWPF_Medecin.View.Usecases.Patient;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using System;
 using System.Windows;
@@ -25,24 +27,6 @@ namespace benais_jWPF_Medecin.ViewModel
         #endregion
 
         #region Getters/Setters
-
-        public ICommand LogoutCommand
-        {
-            get { return _logoutCommand; }
-            set { _logoutCommand = value; }
-        }
-        public ICommand UsersViewCommand
-        {
-            get { return _usersViewCommand; }
-            set { _usersViewCommand = value; }
-        }
-
-        public ICommand PatientsViewCommand
-        {
-            get { return _patientsViewCommand; }
-            set { _patientsViewCommand = value; }
-        }
-
 
         public User CurrentUser
         {
@@ -84,29 +68,47 @@ namespace benais_jWPF_Medecin.ViewModel
         #endregion
 
         #region Command
-        private ICommand _logoutCommand;
-        private ICommand _usersViewCommand;
-        private ICommand _patientsViewCommand;
 
+        private ICommand _logoutCommand;
+        public ICommand LogoutCommand
+        {
+            get { return _logoutCommand; }
+            set { _logoutCommand = value; }
+        }
         private void LogoutSession()
         {
             if (_sessionBM.Disconnect())
-            {
-                MessageBox.Show("Success logout");
                 PageMediator.Notify("Change_MainWindow_UC", EUserControl.LOGIN, _login);
-            }
             else
-            {
-                MessageBox.Show("Fail logout");
-            }
+                ShowServerExceptionWindow();
+        }
+
+        private ICommand _usersViewCommand;
+        public ICommand UsersViewCommand
+        {
+            get { return _usersViewCommand; }
+            set { _usersViewCommand = value; }
         }
         private void LoadUsersView()
         {
             CurrentUC = new UsersUC(_login);
         }
+
+        private ICommand _patientsViewCommand;
+        public ICommand PatientsViewCommand
+        {
+            get { return _patientsViewCommand; }
+            set { _patientsViewCommand = value; }
+        }
         private void LoadPatientsView()
         {
             CurrentUC = new PatientsUC(_login);
+        }
+
+        private void ShowServerExceptionWindow()
+        {
+            ServerExceptionWindow window = new ServerExceptionWindow(ErrorDescription.DISCONNECT);
+            window.Show();
         }
 
         #endregion
@@ -152,8 +154,6 @@ namespace benais_jWPF_Medecin.ViewModel
             }
             catch (Exception)
             {
-                MessageBox.Show("Failed changing view");
-                throw;
             }
         }
         #endregion

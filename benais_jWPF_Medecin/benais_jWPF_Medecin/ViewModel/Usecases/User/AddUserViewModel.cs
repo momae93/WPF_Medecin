@@ -1,11 +1,14 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
 using benais_jWPF_Medecin.Model.Enum;
+using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.ServiceUserReference;
 using benais_jWPF_Medecin.View.Converters;
+using benais_jWPF_Medecin.View.Usecases.PopupWindows;
 using benais_jWPF_Medecin.ViewModel.Pattern;
 using benais_jWPF_Medecin.ViewModel.Utils;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -60,12 +63,20 @@ namespace benais_jWPF_Medecin.ViewModel
         public string Login
         {
             get { return _login; }
-            set { _login = value; }
+            set
+            {
+                _login = value;
+                OnPropertyChanged(nameof(Login));
+            }
         }
         public string Role
         {
             get { return _role; }
-            set { _role = value; }
+            set
+            { 
+                _role = value;
+                OnPropertyChanged(nameof(Role));
+            }
         }
         public byte[] Image
         {
@@ -110,42 +121,64 @@ namespace benais_jWPF_Medecin.ViewModel
 
         #region Command
 
-        /// <summary>
-        /// Add new user if fields are corrects
-        /// </summary>
         private ICommand _addUserCommand;
         public ICommand AddUserCommand
         {
             get { return _addUserCommand; }
             set { _addUserCommand = value; }
         }
-        private void AddUser()
+
+        /// <summary>
+        /// Add new user if fields are corrects
+        /// </summary>
+        private async void AddUser()
         {
-            if (!Name.IsNullOrWhiteSpace() && !Firstname.IsNullOrWhiteSpace() &&
-                !Password.IsNullOrWhiteSpace() && !Login.IsNullOrWhiteSpace() &&
-                !Role.IsNullOrWhiteSpace())
+            await Task.Run(() =>
             {
-                User user = new User() { Name = Name, Firstname = Firstname, Pwd = Password, Login = Login, Role = Role, Picture = Image, Connected = false };
-                if (_sessionBM.AddUser(user))
-                    PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS, _currentLogin);
-                else
-                    MessageBox.Show("Fail add user");
-            }
-            else
-            {
-                MessageBox.Show("Fields are empty");
-            }
+                try
+                {
+                    if (!Name.IsNullOrWhiteSpace() && !Firstname.IsNullOrWhiteSpace() &&
+                        !Password.IsNullOrWhiteSpace() && !Login.IsNullOrWhiteSpace() &&
+                        !Role.IsNullOrWhiteSpace())
+                    {
+                        User user = new User() { Name = Name, Firstname = Firstname, Pwd = Password, Login = Login, Role = Role, Picture = Image, Connected = false };
+                        if (_sessionBM.AddUser(user))
+                            DispatchService.Invoke(() => PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS, _currentLogin));
+                        else
+                            DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.ADD_USER));
+                    }
+                    else
+                    {
+                        DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.MISSING_FIELDS));
+                    }
+                }
+                catch (Exception)
+                {
+                    DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.ADD_USER));
+                }
+            });
         }
 
         /// <summary>
-        /// Open a dialog to pick a file
+        /// Show pop up with custom message
         /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
+            serverExceptionWindow.Show();
+        }
+
         private ICommand _loadImageCommand;
         public ICommand LoadImageCommand
         {
             get { return _loadImageCommand; }
             set { _loadImageCommand = value; }
         }
+
+        /// <summary>
+        /// Load image from file picker
+        /// </summary>
         private void LoadImage()
         {
             var dialog = new System.Windows.Forms.OpenFileDialog();
@@ -163,15 +196,16 @@ namespace benais_jWPF_Medecin.ViewModel
             }
         }
 
-        /// <summary>
-        /// Load users user control
-        /// </summary>
         private ICommand _backCommand;
         public ICommand BackCommand
         {
             get { return _backCommand; }
             set { _backCommand = value; }
         }
+
+        /// <summary>
+        /// Navigate to user control
+        /// </summary>
         private void Back()
         {
             PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS, _currentLogin);
