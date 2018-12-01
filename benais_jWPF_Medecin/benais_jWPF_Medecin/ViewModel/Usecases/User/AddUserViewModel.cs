@@ -1,4 +1,5 @@
 ﻿using benais_jWPF_Medecin.BusinessManagement;
+using benais_jWPF_Medecin.Common.Exceptions;
 using benais_jWPF_Medecin.Model.Enum;
 using benais_jWPF_Medecin.Resources;
 using benais_jWPF_Medecin.ServiceUserReference;
@@ -9,7 +10,6 @@ using benais_jWPF_Medecin.ViewModel.Utils;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -131,7 +131,7 @@ namespace benais_jWPF_Medecin.ViewModel
         /// <summary>
         /// Add new user if fields are corrects
         /// </summary>
-        private async void AddUser()
+        private async Task AddUser()
         {
             await Task.Run(() =>
             {
@@ -152,21 +152,13 @@ namespace benais_jWPF_Medecin.ViewModel
                         DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.MISSING_FIELDS));
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    if (e is CustomLargePictureException)
+                        DispatchService.Invoke(() => ShowPictureExceptionWindow());
                     DispatchService.Invoke(() => ShowServerExceptionWindow(ErrorDescription.ADD_USER));
                 }
             });
-        }
-
-        /// <summary>
-        /// Show pop up with custom message
-        /// </summary>
-        /// <param name="description"></param>
-        private void ShowServerExceptionWindow(string description)
-        {
-            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
-            serverExceptionWindow.Show();
         }
 
         private ICommand _loadImageCommand;
@@ -211,6 +203,29 @@ namespace benais_jWPF_Medecin.ViewModel
             PageMediator.Notify("Change_Main_UC", EUserControl.MAIN_USERS, _currentLogin);
         }
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Show pop up with custom message
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowServerExceptionWindow(string description)
+        {
+            ServerExceptionWindow serverExceptionWindow = new ServerExceptionWindow(description);
+            serverExceptionWindow.Show();
+        }
+
+        /// <summary>
+        /// Show pop up for picture exception
+        /// </summary>
+        /// <param name="description"></param>
+        private void ShowPictureExceptionWindow()
+        {
+            PictureExceptionWindow pictureExceptionWindow = new PictureExceptionWindow();
+            pictureExceptionWindow.Show();
+        }
         #endregion
     }
 }

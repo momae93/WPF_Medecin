@@ -8,7 +8,6 @@ using benais_jWPF_Medecin.ViewModel.Utils;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace benais_jWPF_Medecin.ViewModel

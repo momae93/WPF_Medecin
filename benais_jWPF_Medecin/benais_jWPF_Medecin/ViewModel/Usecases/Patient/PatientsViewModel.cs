@@ -6,7 +6,6 @@ using benais_jWPF_Medecin.ViewModel.Pattern;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace benais_jWPF_Medecin.ViewModel
@@ -108,7 +107,7 @@ namespace benais_jWPF_Medecin.ViewModel
         /// <summary>
         /// Run async task to delete patient
         /// </summary>
-        private async void DeletePatient()
+        private async Task DeletePatient()
         {
             await Task.Run(() =>
             {

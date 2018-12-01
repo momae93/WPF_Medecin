@@ -104,7 +104,7 @@ namespace benais_jWPF_Medecin.ViewModel
         /// <summary>
         /// Run async task to delete user
         /// </summary>
-        private async void DeleteUser()
+        private async Task DeleteUser()
         {
             await Task.Run(() =>
             {
