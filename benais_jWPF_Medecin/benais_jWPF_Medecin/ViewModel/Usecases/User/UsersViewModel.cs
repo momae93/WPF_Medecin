@@ -103,7 +103,6 @@ namespace benais_jWPF_Medecin.ViewModel
             get { return _deleteUserCommand; }
             set { _deleteUserCommand = value; }
         }
-
         /// <summary>
         /// Run async task to delete user
         /// </summary>
@@ -118,8 +117,10 @@ namespace benais_jWPF_Medecin.ViewModel
                         bool isDeleted = _sessionBM.DeleteUser(SelectedUser.Login);
                         if (isDeleted)
                         {
-                            DispatchService.Invoke(() => { UserList.Remove(SelectedUser); });
-                            SelectedUser = null;
+                            DispatchService.Invoke(() => {
+                                UserList.Remove(SelectedUser);
+                                SelectedUser = null;
+                            });
                         }
                     }
                 }
