@@ -53,60 +53,92 @@
                             FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
                 </Grid>
 
+                <TextBlock Grid.Column="1"
+                           FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
                 <ScrollViewer Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}"
                               Margin="10" Grid.Column="1" VerticalScrollBarVisibility="Auto">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Vertical">
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Date:" FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}"/>
-                                <TextBlock Text="{Binding SelectedObservation.Date}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 20 0 0">
-                                <TextBlock Text="Weight:" FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}"/>
-                                <TextBlock Text="{Binding SelectedObservation.Weight}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 20 0 0">
-                                <TextBlock Text="Blood pressure: " FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}"/>
-                                <TextBlock Text="{Binding SelectedObservation.BloodPressure}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-                                <TextBlock Text="Comment: " FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}"/>
-                                <TextBlock Text="{Binding SelectedObservation.Comment}" 
+                        <Grid>
+                            <TextBlock HorizontalAlignment="Center"  VerticalAlignment="Center"
+                                       FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"
+                                       Text="No observations selected"
+                                       Visibility="{Binding ShowObservation, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                        <Grid Visibility="{Binding ShowObservation, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=False}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Vertical">
+                                <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" Background="White" Height="auto">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="20" Text="Observation" FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                                        <TextBlock Margin="10 0 0 0" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" 
+                                               FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoRegular}" 
+                                               VerticalAlignment="Center" Text="{Binding SelectedObservation.Date}" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="20">
+                                        <TextBlock Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" 
+                                               FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoBold}" 
+                                               VerticalAlignment="Center" Text="Weight:" HorizontalAlignment="Left"/>
+                                        <TextBlock Margin="10 0 0 0" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoRegular}" VerticalAlignment="Center" Text="{Binding SelectedObservation.Weight}" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="20" Orientation="Horizontal">
+                                        <TextBlock Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" 
+                                               FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoBold}" 
+                                               VerticalAlignment="Center" Text="Blood pressure:" HorizontalAlignment="Left"/>
+                                        <TextBlock Margin="10 0 0 0" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoRegular}" VerticalAlignment="Center" Text="{Binding SelectedObservation.BloodPressure}" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="20" Orientation="Vertical">
+                                        <TextBlock Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" 
+                                               FontSize="{StaticResource FontSizeRegular}" FontFamily="{StaticResource LatoBold}" 
+                                               VerticalAlignment="Center" Text="Comment:" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding SelectedObservation.Comment}" 
                                    FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"
                                    TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Orientation="Vertical">
+                                    <TextBlock Margin="20" Text="Prescription" FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                                    <ListView  Margin="20" Background="Transparent" BorderThickness="0"
+                                           ItemsSource="{Binding SelectedObservation.Prescription}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <BulletDecorator>
+                                                    <BulletDecorator.Bullet>
+                                                        <Ellipse Height="5" Width="5" Fill="Black"/>
+                                                    </BulletDecorator.Bullet>
+                                                    <StackPanel Margin="10 0 0 0" Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding}" FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </BulletDecorator>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
                             </StackPanel>
-                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
-                                <TextBlock Text="Prescriptions: " FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}"/>
-                                <ListView ItemsSource="{Binding SelectedObservation.Prescription}">
+
+                            <StackPanel Grid.Row="3" Orientation="Vertical">
+                                <TextBlock Margin="20" Text="Pictures" FontFamily="{StaticResource LatoBold}" Foreground="{StaticResource ColorDarkBlueAsphaltBrush}" FontSize="{StaticResource FontSizeLarge}" VerticalAlignment="Center"/>
+                                <ListView  Margin="20" Background="Transparent" BorderThickness="0"
+                                           ItemsSource="{Binding SelectedObservation.Pictures}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding}"/>
+                                                <Image Source="{Binding Converter={StaticResource imgConverter}}"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
                             </StackPanel>
-                        </StackPanel>
-                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical">
-                            <TextBlock Text="Pictures:" FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}"/>
-                            <ListView ItemsSource="{Binding SelectedObservation.Pictures}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="{Binding Converter={StaticResource imgConverter}}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
+                        </Grid>
                     </Grid>
+
                 </ScrollViewer>
 
                 <ScrollViewer Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}"
@@ -119,7 +151,18 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <lvc:CartesianChart Grid.Column="0" Margin="10" Series="{Binding WeightCollection}" LegendLocation="Right">
+                <TextBlock Grid.Column="0"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"
+                           Text="No weight datas available."
+                           Visibility="{Binding ShowWeightGraph, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}"/>
+                <TextBlock Grid.Column="1"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"
+                           Text="No blood pressure datas available."
+                           Visibility="{Binding ShowBloodPressureGraph, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}"/>
+                <lvc:CartesianChart Grid.Column="0" Margin="10" Series="{Binding WeightCollection}" LegendLocation="Right"
+                                    Visibility="{Binding ShowWeightGraph, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=False}">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis Title="Value"></lvc:Axis>
                     </lvc:CartesianChart.AxisY>
@@ -127,7 +170,8 @@
                         <lvc:Axis Title="Date" Labels="{Binding DatesCollection}"></lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
-                <lvc:CartesianChart Grid.Column="1" Margin="10" Series="{Binding BloodPressureCollection}" LegendLocation="Right">
+                <lvc:CartesianChart Grid.Column="1" Margin="10" Series="{Binding BloodPressureCollection}" LegendLocation="Right"
+                                    Visibility="{Binding ShowBloodPressureGraph, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=False}">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis Title="Value"></lvc:Axis>
                     </lvc:CartesianChart.AxisY>
