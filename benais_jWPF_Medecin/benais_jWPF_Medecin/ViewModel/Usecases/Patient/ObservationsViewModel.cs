@@ -18,12 +18,15 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
     {
         #region Variables
 
+        private PatientBM _patientBM;
+        private UserBM _userBM;
+
         private string _currentLogin;
+        private bool _isReadOnly;
         private int _idPatient;
         private bool _isLoading;
         private bool _showObservation;
         private bool _isAddView;
-        private PatientBM _patientBM;
         private ObservationBM _observationBM;
         private ServicePatientReference.Patient _selectedPatient;
         private ServicePatientReference.Observation _selectedObservation;
@@ -42,6 +45,15 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
 
         #region Getters/Setters
 
+        public bool IsReadOnly
+        {
+            get { return _isReadOnly; }
+            set
+            {
+                _isReadOnly = value;
+                OnPropertyChanged(nameof(IsReadOnly));
+            }
+        }
         public bool IsLoading
         {
             get { return _isLoading; }
@@ -166,7 +178,9 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
             _currentLogin = currentLogin;
             _idPatient = idPatient;
             _patientBM = new PatientBM();
+            _userBM = new UserBM(currentLogin);
             _observationBM = new ObservationBM();
+            IsReadOnly = _userBM.IsUserReadOnly(currentLogin);
             ObservationsList = new ObservableCollection<ServicePatientReference.Observation>();
             ShowObservation = false;
             IsAddView = false;

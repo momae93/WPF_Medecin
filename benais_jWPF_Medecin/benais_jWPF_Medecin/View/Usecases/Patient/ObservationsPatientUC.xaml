@@ -41,16 +41,19 @@
                             </ListView.ItemTemplate>
                         </ListView>
                     </ScrollViewer>
-                    <Button VerticalAlignment="Center" Grid.Row="2" Content="Add observation"
+                    <Grid VerticalAlignment="Center" Grid.Row="2"
+                          Visibility="{Binding IsReadOnly, Converter={StaticResource booleanToVisibilityCollapsedConverter}, ConverterParameter=True}" >
+                        <Button Content="Add observation"
                             Style="{StaticResource ButtonTransparentStyle}" 
                             Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=True}"
                             Command="{Binding AddObservationCommand}"
                             FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
-                    <Button VerticalAlignment="Center" Grid.Row="2" Content="Cancel"
+                        <Button Content="Cancel"
                             Visibility="{Binding IsAddView, Converter={StaticResource customBooleanToVisibilityConverter}, ConverterParameter=False}"
                             Style="{StaticResource ButtonTransparentStyle}" 
                             Command="{Binding CancelAddObservationCommand}"
                             FontFamily="{StaticResource LatoRegular}" FontSize="{StaticResource FontSizeRegular}"/>
+                    </Grid>
                 </Grid>
 
                 <TextBlock Grid.Column="1"
