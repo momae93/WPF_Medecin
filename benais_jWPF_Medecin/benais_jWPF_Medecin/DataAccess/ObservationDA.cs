@@ -11,6 +11,12 @@ namespace benais_jWPF_Medecin.DataAccess
             _service = new ServiceObservationClient();
         }
 
+        /// <summary>
+        /// Call WCF AddObservation function
+        /// </summary>
+        /// <param name="idPatient"></param>
+        /// <param name="observation"></param>
+        /// <returns></returns>
         public bool AddObservation(int idPatient, Observation observation)
         {
             return _service.AddObservation(idPatient, observation);

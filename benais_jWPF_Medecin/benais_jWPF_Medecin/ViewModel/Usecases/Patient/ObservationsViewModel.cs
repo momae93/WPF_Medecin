@@ -332,8 +332,10 @@ namespace benais_jWPF_Medecin.ViewModel.Usecases.Patient
                 {
                     ServiceObservationReference.Observation observation = (ServiceObservationReference.Observation)param;
                     _observationBM.AddObservation(_idPatient, observation);
-                    IsAddView = false;
-                    InitializePatient(_idPatient);
+                    DispatchService.Invoke(() => {
+                        IsAddView = false;
+                        InitializePatient(_idPatient);
+                    });
                 }
                 catch (Exception e)
                 {

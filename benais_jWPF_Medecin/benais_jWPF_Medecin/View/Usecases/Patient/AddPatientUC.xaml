@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Grid.ColumnSpan="2"  Style="{StaticResource ButtonTransparentStyle}" FontSize="{StaticResource FontSizeLarge}" Command="{Binding BackCommand}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0">Back</Button>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Grid >
+            <Grid Background="{StaticResource ColorGreyCloudBrush}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
