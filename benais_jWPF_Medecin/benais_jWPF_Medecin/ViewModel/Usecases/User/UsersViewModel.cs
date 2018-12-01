@@ -87,9 +87,9 @@ namespace benais_jWPF_Medecin.ViewModel
             IsLoading = false;
             IsReadOnly = _sessionBM.IsUserReadOnly(login);
             UserList = new ObservableCollection<User>();
-            DeleteUserCommand = new RelayCommand(param => DeleteUser(), param => true);
-            AddUserCommand = new RelayCommand(param => ChangeView(), param => true);
             SelectedUser = null;
+
+            InitializeCommands();
             InitializeUsers();
         }
 
@@ -149,6 +149,15 @@ namespace benais_jWPF_Medecin.ViewModel
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Initialize all commands
+        /// </summary>
+        private void InitializeCommands()
+        {
+            DeleteUserCommand = new RelayCommand(param => DeleteUser(), param => true);
+            AddUserCommand = new RelayCommand(param => ChangeView(), param => true);
+        }
 
         /// <summary>
         /// Fetch asynchronously the users

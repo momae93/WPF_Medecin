@@ -170,6 +170,9 @@ namespace benais_jWPF_Medecin.ViewModel
 
         #region Methods
 
+        /// <summary>
+        /// Initialize all commands
+        /// </summary>
         private void InitializeCommands()
         {
             DeletePatientCommand = new RelayCommand(param => DeletePatient(), param => true);
